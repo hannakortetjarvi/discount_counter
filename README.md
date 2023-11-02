@@ -1,1 +1,1 @@
-# discount_counter
+# Discount Counter
