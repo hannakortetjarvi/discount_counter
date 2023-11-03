@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  api:
+    build: api
+    ports:
+        - 8080:8000
+    volumes:
+        - ./api:/app
+
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: laravel
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - laravel
+
+volumes:
+  db_data:
+
+networks:
+  laravel:
