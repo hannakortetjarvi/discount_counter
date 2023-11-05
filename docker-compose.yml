@@ -6,7 +6,18 @@ services:
     ports:
         - 8080:8000
     volumes:
-        - ./api:/app
+        - ./api:/api
+    depends_on:
+      - ui
+      - db
+
+  ui:
+    build: ui
+    container_name: discount-ui
+    ports:
+        - 3000:8080
+    volumes:
+      - ./ui/src:/ui/src
 
   db:
     image: postgres:13
