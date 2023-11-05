@@ -2,14 +2,26 @@ version: '3.8'
 services:
   api:
     build: api
+    container_name: discount-api
     ports:
         - 8080:8000
     volumes:
-        - ./api:/app
+        - ./api:/api
+    depends_on:
+      - ui
+      - db
+
+  ui:
+    build: ui
+    container_name: discount-ui
+    ports:
+        - 3000:8080
+    volumes:
+      - ./ui/src:/ui/src
 
   db:
     image: postgres:13
-    container_name: postgres-db
+    container_name: discount-pgdb
     restart: always
     environment:
       POSTGRES_DB: laravel
