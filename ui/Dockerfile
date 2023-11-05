@@ -4,10 +4,12 @@ FROM node:lts-alpine
 WORKDIR /ui
 COPY package*.json ./
 RUN npm install
+
+# copy necessary files to container
 COPY src/ src/
 COPY cypress/ cypress/
 COPY vite* .
 COPY index.html .
 
-# start HTTP server at root
+# start ui
 CMD [ "npm", "run", "dev" ]
