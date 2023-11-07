@@ -6,9 +6,21 @@ describe('Visit page', () => {
     cy.contains('h1', 'Discount Counter')
   })
 
-  it('select item', () => {
-    cy.visit('/')
-    cy.get('selection').select('Sales')
-    cy.get('selection').should('have.value', 'Sales')
+  it('should visit discounts', () => {
+    cy.visit('/discounts')
+    cy.contains('p', 'Discounts')
+  })
+
+  it('should visit data', () => {
+    cy.visit('/data')
+    cy.contains('p', 'Data')
+  })
+})
+
+describe('Select item', () => {
+  it('select item from select component', () => {
+    cy.visit('/discounts')
+    cy.get('select.selectItem').select('sales')
+    cy.get('select.selectItem').should('have.value', 'sales')
   })
 })
