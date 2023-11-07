@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import Greeting from './components/Greeting.vue'
+import GreetingItem from './components/GreetingItem.vue'
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import Greeting from './components/Greeting.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <Greeting msg="Discount Counter" />
+      <GreetingItem msg="Discount Counter" />
 
       <nav>
         <RouterLink to="/discounts">Discounts</RouterLink>

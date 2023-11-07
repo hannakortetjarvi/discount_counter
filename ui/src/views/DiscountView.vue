@@ -12,7 +12,7 @@ const selected = 'sales'
 <template>
   <main>
     <select v-model="selected" class="selectItem">
-        <option v-for="option in options" :value="option.value">
+        <option v-for="option in options" :value="option.value" :key=option.value>
 		      {{ option.text }}
 	      </option>
       </select>

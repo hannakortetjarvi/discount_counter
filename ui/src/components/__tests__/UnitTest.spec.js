@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import Greeting from '../Greeting.vue'
+import GreetingItem from '../GreetingItem.vue'
 import DiscountView from '../../views/DiscountView.vue'
 
 describe('Greeting', () => {
   it('Renders greeting', () => {
-    const wrapper = mount(Greeting, { props: { msg: 'Test greeting' } })
+    const wrapper = mount(GreetingItem, { props: { msg: 'Test greeting' } })
     expect(wrapper.text()).toContain("Test greeting")
   })
 
