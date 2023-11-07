@@ -1,5 +1,6 @@
 <script setup>
 import DataTable from '../components/DataTable.vue'
+import InfoQuery from '../components/InfoQuery.vue'
 </script>
 
 <template>
@@ -10,7 +11,7 @@ import DataTable from '../components/DataTable.vue'
 	      </option>
       </select>
 
-    <!--<TheWelcome />-->
+    <InfoQuery :type=selected />
 
     <DataTable :type=selected />
   </main>

@@ -25,8 +25,7 @@ export default {
   },
   data() {
     return {
-      discounts: [],
-      selected: 'sales'
+      discounts: []
     }
   },
   watch: { 
@@ -36,13 +35,13 @@ export default {
   },
   computed: {
     filteredDiscounts() {
-      switch (this.selected) {
+      switch (this.type) {
         case 'sales':
-          return this.discounts.filter((discount) => discount.type === 'sales');
+          //return this.discounts.filter((discount) => discount.type === 'sales');
         case 'season':
-          return this.discounts.filter((discount) => discount.type === 'season');
+          //return this.discounts.filter((discount) => discount.type === 'season');
         case 'deals':
-          return this.discounts.filter((discount) => discount.type === 'deals');
+          //return this.discounts.filter((discount) => discount.type === 'deals');
         default:
           return [];
       }
