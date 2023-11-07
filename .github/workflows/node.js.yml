@@ -32,9 +32,12 @@ jobs:
     - name: Build UI
       working-directory: ./ui
       run: npm run build --if-present
-    - name: Test UI
+    - name: Unit Test UI
       working-directory: ./ui
       run: npm run test:unit
+    - name: E2E Test est UI
+      working-directory: ./ui
+      run: npm run test:e2e
     - name: Lint UI
       working-directory: ./ui
       run: npm run lint
