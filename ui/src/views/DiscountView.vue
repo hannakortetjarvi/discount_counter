@@ -1,12 +1,5 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-
-const options = [
-  {value: 'sales', text: 'Customer sales'},
-  {value: 'season', text: 'Time of the year'},
-  {value: 'deals', text: 'Special deals'}
-]
-const selected = 'sales'
+import DataTable from '../components/DataTable.vue'
 </script>
 
 <template>
@@ -16,6 +9,41 @@ const selected = 'sales'
 		      {{ option.text }}
 	      </option>
       </select>
-    <TheWelcome />
+
+    <!--<TheWelcome />-->
+
+    <DataTable :type=selected />
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      discounts: [],
+      selected: 'sales',
+      options: [
+        {value: 'sales', text: 'Customer sales'},
+        {value: 'season', text: 'Time of the year'},
+        {value: 'deals', text: 'Special deals'}]
+    }
+  },
+  computed: {
+    filteredDiscounts() {
+      switch (this.selected) {
+        case 'sales':
+          return this.discounts.filter((discount) => discount.type === 'sales');
+        case 'season':
+          return this.discounts.filter((discount) => discount.type === 'season');
+        case 'deals':
+          return this.discounts.filter((discount) => discount.type === 'deals');
+        default:
+          return [];
+      }
+    },
+  },
+  mounted() {
+    // Fetch data
+  },
+};
+</script>
