@@ -21,7 +21,8 @@ export default {
       discounts: [],
       selected: 'all',
       options: [
-        {value: 'all', text: 'All Customers'}]
+        {value: 'all', text: 'All Customers'}
+      ]
     }
   },
   mounted() {

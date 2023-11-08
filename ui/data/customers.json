@@ -1,0 +1,42 @@
+[
+	{
+		"id": "1",
+        "name": "Matti Meikäläinen"
+	},
+	{
+		"id": "2",
+        "name": "Testaaja Testi"
+	},
+	{
+		"id": "3",
+        "name": "Pekka Pekka"
+	},
+	{
+		"id": "4",
+        "name": "Numero Neljä"
+	},
+	{
+		"id": "5",
+        "name": "Maija Mehiläinen"
+	},
+	{
+		"id": "6",
+        "name": "Esimerkki Henkilö"
+	},
+	{
+		"id": "7",
+        "name": "Seitsemäs"
+	},
+    {
+		"id": "8",
+        "name": "Kaija Kasi"
+	},
+    {
+		"id": "9",
+        "name": "Ysi Ysi"
+	},
+    {
+		"id": "10",
+        "name": "K Kymmenen"
+	}
+]

@@ -1,0 +1,52 @@
+[
+	{
+		"id": "a1",
+        "name": "Juusto",
+        "price": "3,99"
+	},
+	{
+		"id": "b2",
+        "name": "Muki",
+        "price": "14,50"
+	},
+	{
+		"id": "c3",
+        "name": "Kaulakoru",
+        "price": "33,25"
+	},
+	{
+		"id": "d4",
+        "name": "Legosetti",
+        "price": "299,00"
+	},
+	{
+		"id": "e5",
+        "name": "Reppu",
+        "price": "40,90"
+	},
+	{
+		"id": "f6",
+        "name": "Keittiöjakkara",
+        "price": "21,10"
+	},
+	{
+		"id": "g7",
+        "name": "Kahvipaketti",
+        "price": "6,99"
+	},
+    {
+		"id": "h8",
+        "name": "Hieno tietokone",
+        "price": "1399,90"
+	},
+    {
+		"id": "i9",
+        "name": "Ei-niin-hyvä tietokone",
+        "price": "350,00"
+	},
+    {
+		"id": "j10",
+        "name": "Paperivihko",
+        "price": "0,99"
+	}
+]
