@@ -16,10 +16,10 @@ describe('Greeting', () => {
     expect(wrapper.find('select.selectItem').exists()).toBe(true)
   })
 
-  it('Selection has three options', () => {
+  it('Selection has one option for all customers', () => {
     const wrapper = mount(DiscountView);
     const selectElement = wrapper.find('select.selectItem');
     const optionElements = selectElement.findAll('option');
-    expect(optionElements.length).toBe(3);
+    expect(optionElements[0].text()).toBe('All Customers');
   });
 })

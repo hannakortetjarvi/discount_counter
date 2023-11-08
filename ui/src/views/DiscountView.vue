@@ -10,9 +10,6 @@ import InfoQuery from '../components/InfoQuery.vue'
 		      {{ option.text }}
 	      </option>
       </select>
-
-    <InfoQuery :type=selected />
-
     <DataTable :type=selected />
   </main>
 </template>
@@ -22,26 +19,10 @@ export default {
   data() {
     return {
       discounts: [],
-      selected: 'sales',
+      selected: 'all',
       options: [
-        {value: 'sales', text: 'Customer sales'},
-        {value: 'season', text: 'Time of the year'},
-        {value: 'deals', text: 'Special deals'}]
+        {value: 'all', text: 'All Customers'}]
     }
-  },
-  computed: {
-    filteredDiscounts() {
-      switch (this.selected) {
-        case 'sales':
-          return this.discounts.filter((discount) => discount.type === 'sales');
-        case 'season':
-          return this.discounts.filter((discount) => discount.type === 'season');
-        case 'deals':
-          return this.discounts.filter((discount) => discount.type === 'deals');
-        default:
-          return [];
-      }
-    },
   },
   mounted() {
     // Fetch data
