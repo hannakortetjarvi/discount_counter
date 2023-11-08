@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   api:
+    env_file: ./api/.env
     build: api
     container_name: discount-api
     ports:
@@ -20,13 +21,15 @@ services:
       - ./ui/src:/ui/src
 
   db:
-    image: postgres:13
+    image: postgres:14.1
     container_name: discount-pgdb
     restart: always
     environment:
-      POSTGRES_DB: laravel
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:

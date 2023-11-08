@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/discounts', function () {
+    return view('welcome', ['discounts' => App\Models\Discount::all()]);
+});
+
+Route::get('/sales', function () {
+    return view('welcome', ['sales' => App\Models\Sales::all()]);
 });
