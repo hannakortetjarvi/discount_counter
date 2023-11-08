@@ -1,8 +1,26 @@
 // https://on.cypress.io/api
 
-describe('My First Test', () => {
-  it('visits the app root url', () => {
+describe('Visit page', () => {
+  it('should visit root', () => {
     cy.visit('/')
-    cy.contains('h1', 'You did it!')
+    cy.contains('h1', 'Discount Counter')
+  })
+
+  it('should visit discounts', () => {
+    cy.visit('/discounts')
+    cy.contains('p', 'Discounts')
+  })
+
+  it('should visit data', () => {
+    cy.visit('/data')
+    cy.contains('p', 'Data')
+  })
+})
+
+describe('Select item', () => {
+  it('select item from select component', () => {
+    cy.visit('/discounts')
+    cy.get('select.selectItem').select('all')
+    cy.get('select.selectItem').should('have.value', 'all')
   })
 })

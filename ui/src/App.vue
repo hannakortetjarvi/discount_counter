@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import GreetingItem from './components/GreetingItem.vue'
 </script>
 
 <template>
@@ -8,17 +8,19 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it! asd" />
+      <GreetingItem msg="Discount Counter" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/discounts">Discounts</RouterLink>
+        <RouterLink to="/data">Data</RouterLink>
       </nav>
+
     </div>
   </header>
 
-  <RouterView />
+  <RouterView/>
 </template>
+
 
 <style scoped>
 header {
