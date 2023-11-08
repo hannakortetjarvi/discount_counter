@@ -6,27 +6,25 @@ import InfoQuery from '../components/InfoQuery.vue'
 <template>
   <main>
     <select v-model="selected" class="selectItem">
-        <option v-for="option in options" :value="option.value" :key=option.value>
-		      {{ option.text }}
-	      </option>
-      </select>
+      <option value="all" key=all>All Customers</option>
+      <option v-for="customer in customers" :value="customer.name" :key=customer.id>
+		    {{ customer.name }}
+	    </option>
+    </select>
+
     <DataTable :type=selected />
   </main>
 </template>
 
 <script>
+import customers from '../../data/customers.json'
+
 export default {
   data() {
     return {
-      discounts: [],
-      selected: 'all',
-      options: [
-        {value: 'all', text: 'All Customers'}
-      ]
+      customers: customers,
+      selected: 'all'
     }
-  },
-  mounted() {
-    // Fetch data
-  },
+  }
 };
 </script>
