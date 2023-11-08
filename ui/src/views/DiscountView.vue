@@ -1,10 +1,10 @@
 <script setup>
-import DataTable from '../components/DataTable.vue'
-import InfoQuery from '../components/InfoQuery.vue'
+import DiscountTable from '../components/DiscountTable.vue'
 </script>
 
 <template>
   <main>
+    <p>Discounts</p>
     <select v-model="selected" class="selectItem">
       <option value="all" key=all>All Customers</option>
       <option v-for="customer in customers" :value="customer.name" :key=customer.id>
@@ -12,7 +12,7 @@ import InfoQuery from '../components/InfoQuery.vue'
 	    </option>
     </select>
 
-    <DataTable :type=selected />
+    <DiscountTable :type=selected />
   </main>
 </template>
 
