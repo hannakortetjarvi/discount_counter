@@ -38,6 +38,8 @@
 
                     <p class="mb2">end: {{ $discount->end_date }}</p>
 
+                    <a href="{{ route('discounts.edit', ['id' => $discount->id]) }}" class="btn">Update</a>
+
                 </div>
 
             </div>

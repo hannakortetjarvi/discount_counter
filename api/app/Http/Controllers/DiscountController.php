@@ -60,6 +60,6 @@ class DiscountController extends Controller
 
         $discount->update($validatedData);
 
-        return redirect()->route('discounts.index')->with('success', 'Discount updated successfully');
+        return redirect('/discounts')->with('success', 'Discount updated successfully');
     }
 }

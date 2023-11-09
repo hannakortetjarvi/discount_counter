@@ -56,6 +56,6 @@ class SaleController extends Controller
         ]);
 
         $sale->update($validatedData);
-        return redirect()->route('sales.index')->with('success', 'Sale updated successfully');
-}
+        return redirect('/sales')->with('success', 'Sale updated successfully');
+    }
 }

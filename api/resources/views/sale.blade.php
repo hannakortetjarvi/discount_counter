@@ -59,6 +59,8 @@
 
                     <p class="mb2">count: {{ $sale->count }}</p>
 
+                    <a href="{{ route('sales.edit', ['id' => $sale->id]) }}" class="btn">Update</a>
+
                 </div>
 
             </div>

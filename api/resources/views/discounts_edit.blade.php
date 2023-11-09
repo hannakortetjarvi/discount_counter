@@ -1,21 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html>
-<head>
-    <title>Edit Discount</title>
-</head>
-<body>
-    <h1>Edit Discount</h1>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <head>
 
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+        <title>Sales</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+
+    </head>
+
+    <body>
+
+    <div class="mw6 center pa3 sans-serif">
+
+    <p>Update sale</p>
     <form method="POST" action="{{ route('discounts.update', ['id' => $discount->id]) }}">
         @csrf
         @method('PUT')
@@ -54,5 +59,9 @@
             <button type="submit">Update Discount</button>
         </div>
     </form>
+
+    </div>
+
 </body>
+
 </html>
