@@ -8,20 +8,35 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
+    - name: Check Service Health
+      run: docker ps -a
     - name: Copy .env
       working-directory: ./api
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
       working-directory: ./api
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
     - name: Generate key
       working-directory: ./api
-      run: php artisan key:generate
+      run: |
+        php artisan key:generate
+        php artisan config:cache
     - name: Run tests
       working-directory: ./api
       run: php artisan test
