@@ -27,6 +27,8 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
+    - name: Check Service Health
+      run: docker ps -a
     - name: Copy .env
       working-directory: ./api
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
