@@ -27,6 +27,10 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
+    - name: List PostgreSQL Users
+      run: psql -U postgres -c '\du'
+    - name: List PostgreSQL Databases
+      run: psql -U postgres -c '\l'
     - name: Check Service Health
       run: docker ps -a
     - name: Copy .env
