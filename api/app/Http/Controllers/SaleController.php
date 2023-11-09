@@ -24,7 +24,7 @@ class SaleController extends Controller
             'count' => 'required|numeric',
         ]);
         Sale::create($data);
-        return redirect('/sales')->with('success', 'Sale applied successfully.');
+        return redirect('/sales');
     }
 
     public function specificSale($id)
@@ -56,6 +56,18 @@ class SaleController extends Controller
         ]);
 
         $sale->update($validatedData);
-        return redirect('/sales')->with('success', 'Sale updated successfully');
+        return redirect('/sales');
+    }
+
+    public function delete($id)
+    {
+        $sale = Sale::find($id);
+
+        if ($sale) {
+            $sale->delete();
+            return redirect('/sales');
+        } else {
+            abort(404);
+        }
     }
 }

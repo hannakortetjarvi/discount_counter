@@ -26,7 +26,7 @@ class DiscountController extends Controller
             'end_date' => 'date|after:start_date',
         ]);
         Discount::create($data);
-        return redirect('/discounts')->with('success', 'Discount applied successfully.');
+        return redirect('/discounts');
     }
 
     public function specificDiscount($id)
@@ -60,6 +60,18 @@ class DiscountController extends Controller
 
         $discount->update($validatedData);
 
-        return redirect('/discounts')->with('success', 'Discount updated successfully');
+        return redirect('/discounts');
+    }
+
+    public function delete($id)
+    {
+        $discount = Discount::find($id);
+
+        if ($discount) {
+            $discount->delete();
+            return redirect('/discounts');
+        } else {
+            abort(404);
+        }
     }
 }

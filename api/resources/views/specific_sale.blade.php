@@ -33,6 +33,12 @@
 
                 <a href="{{ route('sales.edit', ['id' => $sale->id]) }}" class="btn">Update</a>
 
+                <form method="POST" action="{{ route('sales.delete', ['id' => $sale->id]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
+
             </div>
 
         </div>

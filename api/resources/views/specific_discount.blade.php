@@ -40,6 +40,12 @@
 
                     <a href="{{ route('discounts.edit', ['id' => $discount->id]) }}" class="btn">Update</a>
 
+                    <form method="POST" action="{{ route('discounts.delete', ['id' => $discount->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+
                 </div>
 
             </div>
