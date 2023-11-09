@@ -13,6 +13,6 @@ class Sale extends Model
     protected $fillable = [
         'customer_id',
         'product_id',
-        'count'
+        'count',
     ];
 }

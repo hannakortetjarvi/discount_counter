@@ -1,51 +1,51 @@
 [
 	{
-		"id": "a1",
+		"id": "f29ac759-ebc6-4804-a1c2-62764dfc2dce",
         "name": "Juusto",
         "price": "3,99"
 	},
 	{
-		"id": "b2",
+		"id": "182a4cba-46db-43c6-8d92-9a6837c2cb24",
         "name": "Muki",
         "price": "14,50"
 	},
 	{
-		"id": "c3",
+		"id": "aee5c146-5829-4ab4-b8fb-3d4219b3bcb5",
         "name": "Kaulakoru",
         "price": "33,25"
 	},
 	{
-		"id": "d4",
+		"id": "18111377-2b40-4dff-8931-980cc1d12d2f",
         "name": "Legosetti",
         "price": "299,00"
 	},
 	{
-		"id": "e5",
+		"id": "b5c5a63a-8bb0-4ecf-851e-484224220bd6",
         "name": "Reppu",
         "price": "40,90"
 	},
 	{
-		"id": "f6",
+		"id": "c3efd66e-5b88-4cc6-b23c-216b7409aa18",
         "name": "Keittiöjakkara",
         "price": "21,10"
 	},
 	{
-		"id": "g7",
+		"id": "bce1b80d-9f74-45ca-80c4-00ed481bd4cb",
         "name": "Kahvipaketti",
         "price": "6,99"
 	},
     {
-		"id": "h8",
+		"id": "04384d8c-0f75-40d8-a36b-3282b85c17c2",
         "name": "Hieno tietokone",
         "price": "1399,90"
 	},
     {
-		"id": "i9",
+		"id": "64a10bdc-f851-44be-a727-03b88c867ca1",
         "name": "Ei-niin-hyvä tietokone",
         "price": "350,00"
 	},
     {
-		"id": "j10",
+		"id": "b5e577b4-9606-4df9-9240-1126d95f066d",
         "name": "Paperivihko",
         "price": "0,99"
 	}

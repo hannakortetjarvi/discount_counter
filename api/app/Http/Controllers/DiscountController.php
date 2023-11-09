@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Discount;
+use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
@@ -33,7 +32,7 @@ class DiscountController extends Controller
     {
         $discount = Discount::find($id);
 
-        if (!$discount) {
+        if (! $discount) {
             abort(404);
         }
 

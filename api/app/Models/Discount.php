@@ -16,6 +16,6 @@ class Discount extends Model
         'type',
         'amount',
         'start_date',
-        'end_date'
+        'end_date',
     ];
 }

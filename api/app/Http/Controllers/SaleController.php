@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Sale;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
@@ -31,7 +29,7 @@ class SaleController extends Controller
     {
         $sale = Sale::find($id);
 
-        if (!$sale) {
+        if (! $sale) {
             abort(404);
         }
 
