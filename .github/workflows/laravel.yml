@@ -27,6 +27,8 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v3
+    - name: Start PostgreSQL Container
+      run: docker start postgres
     - name: List PostgreSQL Users
       run: psql -U postgres -c '\du'
     - name: List PostgreSQL Databases
