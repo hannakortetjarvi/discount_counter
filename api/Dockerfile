@@ -1,4 +1,4 @@
-FROM php:8.2
+FROM php:8.1
 
 # update container and install packages
 RUN apt-get update -y && apt-get install -y libmcrypt-dev openssl libmemcached-dev libssl-dev zlib1g-dev
