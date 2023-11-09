@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Discount;
 
 class DiscountController extends Controller
 {
@@ -19,10 +21,45 @@ class DiscountController extends Controller
             'product_id' => 'required',
             'customer_id' => 'required',
             'amount' => 'required|numeric',
+            'type' => 'string',
+            'start_date' => 'date',
+            'end_date' => 'date|after:start_date',
+        ]);
+        Discount::create($data);
+        return redirect('/discounts')->with('success', 'Discount applied successfully.');
+    }
+
+    public function specificDiscount($id)
+    {
+        $discount = Discount::find($id);
+
+        if (!$discount) {
+            abort(404);
+        }
+
+        return view('specific_discount', ['discount' => $discount]);
+    }
+
+    public function edit($id)
+    {
+        $discount = Discount::findOrFail($id);
+        return view('discounts_edit', ['discount' => $discount]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $discount = Discount::findOrFail($id);
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'customer_id' => 'required',
+            'amount' => 'required|numeric',
+            'type' => 'string',
             'start_date' => 'date',
             'end_date' => 'date|after:start_date',
         ]);
 
-        return redirect('/discounts')->with('success', 'Discount applied successfully.');
+        $discount->update($validatedData);
+
+        return redirect()->route('discounts.index')->with('success', 'Discount updated successfully');
     }
 }

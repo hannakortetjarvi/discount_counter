@@ -22,21 +22,58 @@
 
             <h1 class="mb4">Discounts</h1>
 
+            <p>Create a new discount</p>
 
+            <form method = "POST" action= "/discounts">
+                @csrf
+                <div>
+                    <input type="text" name="product_id" placeholder="Product id">
+                </div>
+
+                <div>
+                    <input type="text" name="customer_id" placeholder="Customer id">
+                </div>
+
+                <div>
+                    <input type="text" name="type" placeholder="Type of discount">
+                </div>
+
+                <div>
+                    <input type="text" name="amount" placeholder="Discount amount">
+                </div>
+
+                <div>
+                    <input type="date" name="start_date" placeholder="Start date">
+                </div>
+
+                <div>
+                    <input type="date" name="end_date" placeholder="End date">
+                </div>
+
+                <div>
+                    <button type = "submit"> Create Discount </button>
+                </div>
+            </form>
 
             @foreach($discounts as $discount)
 
             <div class="pa2 mb3 striped--near-white">
 
-                <header class="b mb2">{{ $discount->customer_id }}</header>
+                <header class="b mb2">{{ $discount->id }}</header>
 
                 <div class="pl2">
 
-                    <p class="mb2">id: {{ $discount->id }}</p>
+                    <p class="mb2">Customer id: {{ $discount->customer_id }}</p>
+
+                    <p class="mb2">Product id: {{ $discount->product_id }}</p>
 
                     <p class="mb2">amount: {{ $discount->amount }}</p>
 
                     <p class="mb2">type: {{ $discount->type }}</p>
+
+                    <p class="mb2">start: {{ $discount->start_date }}</p>
+
+                    <p class="mb2">end: {{ $discount->end_date }}</p>
 
                 </div>
 
