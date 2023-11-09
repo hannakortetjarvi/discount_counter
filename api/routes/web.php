@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/discounts', function () {
-    return view('discount', ['discounts' => App\Models\Discount::all()]);
+Route::prefix('discounts')->group(function () {
+    Route::get('/', 'DiscountController@index');
+    Route::post('/', 'DiscountController@postDiscount');
 });
 
-Route::get('/sales', function () {
-    return view('sale', ['sales' => App\Models\Sale::all()]);
+Route::prefix('sales')->group(function () {
+    Route::get('/', 'SaleController@index');
+    Route::post('/', 'SaleController@postSale');
 });
