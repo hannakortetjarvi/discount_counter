@@ -18,7 +18,7 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Update composer
       working-directory: ./api
-      run: composer update --lock
+      run: composer update --lock -W
     - name: Install Dependencies
       working-directory: ./api
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
