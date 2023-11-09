@@ -8,9 +8,6 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
 
-    env:
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
     services:
       postgres:
         image: postgres:14
@@ -35,11 +32,12 @@ jobs:
     - name: Install Dependencies
       working-directory: ./api
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
+    - name: Copy .env -file
+      working-directory: ./api
+      run: cp .env.ci .env
     - name: Generate key
       working-directory: ./api
-      run: |
-        cp .env.ci .env
-        php artisan key:generate
+      run: php artisan key:generate
     - name: Run tests
       working-directory: ./api
       run: php artisan test
