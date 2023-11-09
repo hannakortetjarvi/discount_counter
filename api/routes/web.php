@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/discounts', function () {
-    return view('welcome', ['discounts' => App\Models\Discount::all()]);
+    return view('discount', ['discounts' => App\Models\Discount::all()]);
 });
 
 Route::get('/sales', function () {
-    return view('welcome', ['sales' => App\Models\Sales::all()]);
+    return view('sale', ['sales' => App\Models\Sale::all()]);
 });
