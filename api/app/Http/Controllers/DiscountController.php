@@ -16,7 +16,11 @@ class DiscountController extends Controller
     {
         // Validate and process data
         $data = $request->validate([
-            //
+            'product_id' => 'required',
+            'customer_id' => 'required',
+            'amount' => 'required|numeric',
+            'start_date' => 'date',
+            'end_date' => 'date|after:start_date',
         ]);
 
         return redirect('/discounts')->with('success', 'Discount applied successfully.');

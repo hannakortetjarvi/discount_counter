@@ -16,7 +16,9 @@ class SaleController extends Controller
     {
         // Validate and process data
         $data = $request->validate([
-            //
+            'product_id' => 'required',
+            'customer_id' => 'required',
+            'count' => 'required|numeric',
         ]);
 
         return redirect('/sales')->with('success', 'Sale applied successfully.');
