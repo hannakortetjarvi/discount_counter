@@ -2,18 +2,23 @@
     <table>
         <thead>
           <tr>
-            <th>Sale Id</th>
+            <th>Discount Id</th>
             <th>Customer Id</th>
             <th>Product Id</th>
-            <th>Count (how many products)</th>
+            <th>Type</th>
+            <th>Amount (%)</th>
+            <th>Start date</th>
+            <th>End date</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="sale in sales" :key="sale.id">
-            <td>{{ sale.id }}</td>
-            <td>{{ sale.customer_id }}</td>
-            <td>{{ sale.product_id }}</td>
-            <td>{{ sale.count}}</td>
+          <tr v-for="discount in discounts" :key="discount.id">
+            <td>{{ discount.id }}</td>
+            <td>{{ discount.customer_id }}</td>
+            <td>{{ discount.product_id }}</td>
+            <td>{{ discount.type}}</td>
+            <td>{{ discount.amount}}</td>
+            <td>{{ discount.start_date}}</td>
           </tr>
         </tbody>
       </table>
@@ -25,7 +30,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            sales: []
+            discounts: []
         }
     },
     watch: { 
@@ -39,7 +44,7 @@ export default {
     methods: {
       async fetchData() {
         try {
-          const resp = await axios.get('http://localhost:8080/sales');
+          const resp = await axios.get('http://localhost:8080/discounts');
           console.log(resp);
           this.sales = resp.data.data;
         } catch (error) {

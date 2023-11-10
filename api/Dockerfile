@@ -9,5 +9,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /api
 
 # start api in port 8000
+EXPOSE 8080
 CMD php artisan serve --host=0.0.0.0 --port=8000
-EXPOSE 8000

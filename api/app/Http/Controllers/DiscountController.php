@@ -9,8 +9,8 @@ class DiscountController extends Controller
 {
     public function index()
     {
-        $discounts = Discount::all();
-        return view('discount', ['discounts' => $discounts]);
+        $discounts = Discount::paginate();
+        return response()->json($discounts);
     }
 
     public function postDiscount(Request $request)
@@ -24,8 +24,8 @@ class DiscountController extends Controller
             'start_date' => 'date',
             'end_date' => 'date|after:start_date',
         ]);
-        Discount::create($data);
-        return redirect('/discounts');
+        $discount = Discount::create($data);
+        return response()->json($discount);
     }
 
     public function specificDiscount($id)
@@ -36,13 +36,7 @@ class DiscountController extends Controller
             abort(404);
         }
 
-        return view('specific_discount', ['discount' => $discount]);
-    }
-
-    public function edit($id)
-    {
-        $discount = Discount::findOrFail($id);
-        return view('discounts_edit', ['discount' => $discount]);
+        return response()->json($discount);
     }
 
     public function update(Request $request, $id)
@@ -58,8 +52,7 @@ class DiscountController extends Controller
         ]);
 
         $discount->update($validatedData);
-
-        return redirect('/discounts');
+        return response()->json($discount);
     }
 
     public function delete($id)
@@ -68,7 +61,7 @@ class DiscountController extends Controller
 
         if ($discount) {
             $discount->delete();
-            return redirect('/discounts');
+            return response()->json(null);
         } else {
             abort(404);
         }

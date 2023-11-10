@@ -9,8 +9,8 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::all();
-        return view('sale', ['sales' => $sales]);
+        $sales = Sale::paginate();
+        return response()->json($sales);
     }
 
     public function postSale(Request $request)
@@ -21,8 +21,8 @@ class SaleController extends Controller
             'customer_id' => 'required',
             'count' => 'required|numeric',
         ]);
-        Sale::create($data);
-        return redirect('/sales');
+        $sale = Sale::create($data);
+        return response()->json($sale);
     }
 
     public function specificSale($id)
@@ -33,20 +33,12 @@ class SaleController extends Controller
             abort(404);
         }
 
-        return view('specific_sale', ['sale' => $sale]);
-    }
-
-    public function edit($id)
-    {
-        $sale = Sale::findOrFail($id);
-        return view('sales_edit', ['sale' => $sale]);
+        return response()->json($sale);
     }
 
     public function update(Request $request, $id)
     {
         $sale = Sale::findOrFail($id);
-
-        // Validate and update the sale data
         $validatedData = $request->validate([
             'product_id' => 'required',
             'customer_id' => 'required',
@@ -54,7 +46,7 @@ class SaleController extends Controller
         ]);
 
         $sale->update($validatedData);
-        return redirect('/sales');
+        return response()->json($sale);
     }
 
     public function delete($id)
@@ -63,7 +55,7 @@ class SaleController extends Controller
 
         if ($sale) {
             $sale->delete();
-            return redirect('/sales');
+            return response()->json(null);
         } else {
             abort(404);
         }

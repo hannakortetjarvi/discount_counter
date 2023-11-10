@@ -14,4 +14,5 @@ COPY index.html ./
 RUN npm run build
 
 # start ui
+EXPOSE 3000
 CMD [ "npm", "run", "dev" ]

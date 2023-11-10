@@ -13,6 +13,7 @@ services:
     networks:
       - app
 
+
   ui:
     build: ui
     container_name: discount-ui
@@ -25,6 +26,7 @@ services:
       - api
     networks:
       - app
+        
 
   db:
     image: postgres:13
@@ -46,3 +48,4 @@ volumes:
 
 networks:
   app:
+    driver: bridge
