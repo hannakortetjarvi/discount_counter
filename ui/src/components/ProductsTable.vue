@@ -4,7 +4,7 @@
           <tr>
             <th>Product Id</th>
             <th>Product Name</th>
-            <th>Product Price</th>
+            <th>Product Price (€)</th>
           </tr>
         </thead>
         <tbody>
