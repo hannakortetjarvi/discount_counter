@@ -15,6 +15,8 @@ class Discount extends Model
         'customer_id',
         'type',
         'amount',
+        'amount_type',
+        'sales',
         'start_date',
         'end_date',
     ];

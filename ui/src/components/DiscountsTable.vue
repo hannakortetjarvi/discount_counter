@@ -19,6 +19,7 @@
             <td>{{ discount.type}}</td>
             <td>{{ discount.amount}}</td>
             <td>{{ discount.start_date}}</td>
+            <td>{{ discount.end_date}}</td>
           </tr>
         </tbody>
       </table>
@@ -46,7 +47,7 @@ export default {
         try {
           const resp = await axios.get('http://localhost:8080/discounts');
           console.log(resp);
-          this.sales = resp.data.data;
+          this.discounts = resp.data.data;
         } catch (error) {
           console.error('Error fetching data:', error);
         };

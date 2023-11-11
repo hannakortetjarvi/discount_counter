@@ -4,13 +4,13 @@
             <form @submit.prevent="createSale">
                 <select v-model="newSale.customer_id" class="selectItem">
                     <option v-for="customer in customers" :value="customer.id">
-                        {{customer.id}} : {{customer.name}}
+                        {{customer.id}} | {{customer.name}}
                     </option>
                 </select>
 
                 <select v-model="newSale.product_id" class="selectItem">
                     <option v-for="product in products" :value="product.id">
-                        {{product.id}} : {{product.name}}
+                        {{product.id}} | {{product.name}} | {{product.price}} 
                     </option>
                 </select>
 
@@ -26,7 +26,6 @@
 import axios from 'axios'
 import customers from '../../data/customers.json'
 import products from '../../data/products.json'
-import apiClient from '../services/api.js';
 
 export default {
     data() {
@@ -43,10 +42,13 @@ export default {
     methods: {
       async createSale() {
         try {
-          await apiClient.post('/sales', this.newSale)
+          await axios.post('http://localhost:8080/sales', this.newSale, {withCredentials: true,})
         } catch (error) {
           console.error('Error fetching data:', error);
         }
+        this.newSale.customer_id = '';
+        this.newSale.product_id = '';
+        this.newSale.count = 0;
       },
     },
 };

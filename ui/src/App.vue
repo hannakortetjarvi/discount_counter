@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import GreetingItem from './components/GreetingItem.vue'
-import LoginComponent from './components/LoginComponent.vue'
 </script>
 
 <template>
@@ -10,7 +9,6 @@ import LoginComponent from './components/LoginComponent.vue'
 
     <div class="wrapper">
       <GreetingItem msg="Discount Counter" />
-      <LoginComponent />
 
       <nav>
         <RouterLink to="/discounts">Discounts</RouterLink>
