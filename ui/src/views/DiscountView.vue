@@ -1,5 +1,5 @@
 <script setup>
-import DiscountTable from '../components/DiscountTable.vue'
+import DiscountsTable from '../components/DiscountsTable.vue'
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import DiscountTable from '../components/DiscountTable.vue'
 	    </option>
     </select>
 
-    <DiscountTable :type=selected />
+    <DiscountsTable />
   </main>
 </template>
 

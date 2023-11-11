@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import GreetingItem from './components/GreetingItem.vue'
+import LoginComponent from './components/LoginComponent.vue'
 </script>
 
 <template>
@@ -9,10 +10,13 @@ import GreetingItem from './components/GreetingItem.vue'
 
     <div class="wrapper">
       <GreetingItem msg="Discount Counter" />
+      <LoginComponent />
 
       <nav>
         <RouterLink to="/discounts">Discounts</RouterLink>
         <RouterLink to="/data">Data</RouterLink>
+        <RouterLink to="/create-discount">Create Discount</RouterLink>
+        <RouterLink to="/create-sale">Add Sale</RouterLink>
       </nav>
 
     </div>
@@ -20,7 +24,6 @@ import GreetingItem from './components/GreetingItem.vue'
 
   <RouterView/>
 </template>
-
 
 <style scoped>
 header {
