@@ -25,7 +25,6 @@
             <th>Customer Id</th>
             <th>Product Id</th>
             <th>Count (how many products)</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>

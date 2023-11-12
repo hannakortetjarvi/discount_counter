@@ -2,7 +2,7 @@
 import CustomersTable from '../components/CustomersTable.vue'
 import ProductsTable from '../components/ProductsTable.vue'
 import SalesTable from '../components/SalesTable.vue'
-import DiscountsTable form '../components/DiscountsTable.vue'
+import DiscountsTable from '../components/DiscountsTable.vue'
 </script>
 
 <template>

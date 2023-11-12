@@ -1,5 +1,6 @@
 <script setup>
 import DiscountsTable from '../components/DiscountsTable.vue'
+import PricesTable from '../components/PricesTable.vue'
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import DiscountsTable from '../components/DiscountsTable.vue'
 	    </option>
     </select>
 
-    <DiscountsTable />
+    <PricesTable :customer_id="selected" />
   </main>
 </template>
 

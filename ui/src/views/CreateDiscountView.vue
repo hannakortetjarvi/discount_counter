@@ -10,7 +10,7 @@
                 </div>
 
                 <select v-if="newDiscount.type == 'none'" v-model="newDiscount.customer_ids" class="selectItem">
-                <option value="all">All Customers</option>
+                    <option value="all">All Customers</option>
                     <option v-for="customer in customers" :value="customer.id">
                         {{customer.id}} | {{customer.name}}
                     </option>
