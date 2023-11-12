@@ -10,7 +10,7 @@
 
                 <select v-model="newSale.product_id" class="selectItem">
                     <option v-for="product in products" :value="product.id">
-                        {{product.id}} | {{product.name}} | {{product.price}} 
+                        {{product.id}} | {{product.name}} | {{product.price}}€
                     </option>
                 </select>
 

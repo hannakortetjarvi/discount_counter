@@ -14,12 +14,12 @@
         <tbody>
           <tr v-for="discount in discounts" :key="discount.id">
             <td>{{ discount.id }}</td>
-            <td>{{ discount.customer_id }}</td>
-            <td>{{ discount.product_id }}</td>
-            <td>{{ discount.type}}</td>
-            <td>{{ discount.amount}}</td>
-            <td>{{ discount.start_date}}</td>
-            <td>{{ discount.end_date}}</td>
+            <td>{{ discount.type }}</td>
+            <td>{{ discount.customer_ids }}</td>
+            <td>{{ discount.product_ids }}</td>
+            <td>{{ discount.amount }}</td>
+            <td>{{ discount.start_date }}</td>
+            <td>{{ discount.end_date }}</td>
           </tr>
         </tbody>
       </table>

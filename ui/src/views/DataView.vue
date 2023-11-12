@@ -2,6 +2,7 @@
 import CustomersTable from '../components/CustomersTable.vue'
 import ProductsTable from '../components/ProductsTable.vue'
 import SalesTable from '../components/SalesTable.vue'
+import DiscountsTable form '../components/DiscountsTable.vue'
 </script>
 
 <template>
@@ -11,11 +12,13 @@ import SalesTable from '../components/SalesTable.vue'
       <option value="customers" key=all>Customers</option>
       <option value="products" key=all>Products</option>
       <option value="sales" key=all>Sales</option>
+      <option value="discounts" key=all>Discounts</option>
     </select>
 
     <CustomersTable v-if="selected == 'customers'" />
     <ProductsTable v-if="selected == 'products'" />
     <SalesTable v-if="selected == 'sales'" />
+    <DiscountsTable v-if="selected == 'discounts'" />
   </div>
 </template>
 
