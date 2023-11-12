@@ -10,7 +10,7 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::paginate();
-        return json_encode($sales);
+        return response()->json($sales);
     }
 
     public function postSale(Request $request)
@@ -22,7 +22,7 @@ class SaleController extends Controller
             'count' => 'required|numeric',
         ]);
         $sale = Sale::create($data);
-        return json_encode($sale);
+        return response()->json($sale);
     }
 
     public function specificSale($id)
@@ -33,7 +33,7 @@ class SaleController extends Controller
             abort(404);
         }
 
-        return json_encode($sale);
+        return response()->json($sale);
     }
 
     public function update(Request $request, $id)
@@ -46,7 +46,7 @@ class SaleController extends Controller
         ]);
 
         $sale->update($validatedData);
-        return json_encode($sale);
+        return response()->json($sale);
     }
 
     public function delete($id)
@@ -55,7 +55,7 @@ class SaleController extends Controller
 
         if ($sale) {
             $sale->delete();
-            return json_encode(null);
+            return response()->json(null);
         } else {
             abort(404);
         }

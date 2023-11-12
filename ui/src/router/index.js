@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DiscountView from '../views/DiscountView.vue'
+import PriceView from '../views/PriceView.vue'
 import DataView from '../views/DataView.vue'
 import CreateSaleView from '../views/CreateSaleView.vue'
 import CreateDiscountView from '../views/CreateDiscountView.vue'
@@ -8,9 +8,9 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/discounts',
-      name: 'discounts',
-      component: DiscountView
+      path: '/prices',
+      name: 'prices',
+      component: PriceView
     },
     {
       path: '/',

@@ -5,7 +5,7 @@ import PricesTable from '../components/PricesTable.vue'
 
 <template>
   <main>
-    <p>Discounts</p>
+    <p>Prices</p>
     <select v-model="selected" class="selectItem">
       <option value="all" key=all>All Customers</option>
       <option v-for="customer in customers" :value="customer.name" :key=customer.id>

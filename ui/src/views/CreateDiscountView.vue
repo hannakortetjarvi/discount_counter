@@ -73,15 +73,15 @@ export default {
         }
 
         if (this.newDiscount.customer_ids == 'all') {
-          this.newDiscount.customer_ids = customers.map(obj => obj['id']);
+          this.newDiscount.customer_ids = (customers.map(obj => obj.id)).toString();
         } else {
-          this.newDiscount.customer_ids = [this.newDiscount.customer_ids];
+          this.newDiscount.customer_ids = ([this.newDiscount.customer_ids]).toString();
         }
 
         if (this.newDiscount.product_ids == 'all') {
-          this.newDiscount.product_ids = products.map(obj => obj['id']);
+          this.newDiscount.product_ids = (products.map(obj => obj.id)).toString();
         } else {
-          this.newDiscount.product_ids = [this.newDiscount.product_ids];
+          this.newDiscount.product_ids = ([this.newDiscount.product_ids]).toString();
         }
 
         console.log(this.newDiscount);
@@ -95,8 +95,8 @@ export default {
         this.emptyDiscount();
       },
       emptyDiscount() {
-        this.newDiscount.customer_id= null;
-        this.newDiscount.product_id= '';
+        this.newDiscount.customer_ids= 'all';
+        this.newDiscount.product_ids= 'all';
         this.newDiscount.amount= 0;
         this.newDiscount.sales= null;
         this.newDiscount.type= 'none';

@@ -10,7 +10,7 @@ class DiscountController extends Controller
     public function index()
     {
         $discounts = Discount::paginate();
-        return json_encode($discounts);
+        return response()->json($discounts);
     }
 
     public function postDiscount(Request $request)
@@ -26,7 +26,7 @@ class DiscountController extends Controller
             'end_date' => 'nullable|date|after:start_date|required_if:type,==,season',
         ]);
         $discount = Discount::create($data);
-        return json_encode($discount);
+        return response()->json($discount);
     }
 
     public function specificDiscount($id)
@@ -37,15 +37,15 @@ class DiscountController extends Controller
             abort(404);
         }
 
-        return json_encode($discount);
+        return response()->json($discount);
     }
 
     public function update(Request $request, $id)
     {
         $discount = Discount::findOrFail($id);
         $validatedData = $request->validate([
-            'product_id' => 'required',
-            'customer_id' => 'required',
+            'product_ids' => 'required',
+            'customer_ids' => 'required',
             'amount' => 'required|numeric|min:1',
             'type' => 'required|string',
             'sales' => 'nullable|numeric|required_if:type,==,sales',
@@ -54,7 +54,7 @@ class DiscountController extends Controller
         ]);
 
         $discount->update($validatedData);
-        return json_encode($discount);
+        return response()->json($discount);
     }
 
     public function delete($id)
@@ -63,7 +63,7 @@ class DiscountController extends Controller
 
         if ($discount) {
             $discount->delete();
-            return json_encode(null);
+            return response()->json(null);
         } else {
             abort(404);
         }

@@ -31,9 +31,14 @@ export default {
     },
     mounted() {
         if (this.customer_id == 'all') {
-            await this.fetchPricesForAll();
+            this.fetchPricesForAll();
         } else {
-            await this.fetchPricesForOne();
+            this.fetchPricesForOne();
+        }
+    },
+    watch: { 
+        selected: function(newVal, oldVal) {
+            console.log('Name changed: ', oldVal, ' --> ', newVal)
         }
     },
     methods: {

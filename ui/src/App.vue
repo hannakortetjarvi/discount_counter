@@ -11,7 +11,7 @@ import GreetingItem from './components/GreetingItem.vue'
       <GreetingItem msg="Discount Counter" />
 
       <nav>
-        <RouterLink to="/discounts">Discounts</RouterLink>
+        <RouterLink to="/discounts">Prices</RouterLink>
         <RouterLink to="/data">Data</RouterLink>
         <RouterLink to="/create-discount">Create Discount</RouterLink>
         <RouterLink to="/create-sale">Add Sale</RouterLink>
