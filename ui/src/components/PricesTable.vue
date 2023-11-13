@@ -1,0 +1,126 @@
+<template>
+    <table>
+        <thead>
+          <tr>
+            <th>Customer Id</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Discounted Price</th>
+            <th>Original Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="price in prices" :key="price.product_id">
+            <td>{{ price.customer_id }}</td>
+            <td>{{ price.id }}</td>
+            <td>{{ price.name }}</td>
+            <td>{{ price.price }}</td>
+            <td>{{ products.find(p => p.id == price.id).price }}</td>
+          </tr>
+        </tbody>
+      </table>
+</template>
+
+<script>
+import axios from 'axios'
+import products from '../../data/products.json'
+import customers from '../../data/customers.json'
+
+export default {
+    props: ['customer_id'],
+    data() {
+        return {
+            prices: [],
+            products: products,
+        }
+    },
+    mounted() {
+        this.initFetch();
+    },
+    watch: { 
+        customer_id: function(newVal, oldVal) {
+            console.log('Customer_id changes: ', oldVal, ' --> ', newVal);
+            this.initFetch();
+        },
+        prices: function(newVal, oldVal) {
+            console.log('Update prices', oldVal, ' --> ', newVal);
+        },
+    },
+    methods: {
+        async initFetch() {
+            if (this.customer_id == 'all') {
+                await this.fetchPricesForAll();
+            } else {
+                await this.fetchPricesForOne();
+            }
+        },
+        async fetchPricesForOne() {
+            try {
+                this.prices = []
+                const resp = await axios.get('http://localhost:8080/prices/${customer_id}');
+                this.calculatePrices(this.customer_id, resp.data.discounts, resp.data.sales);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            };
+        },
+        async fetchPricesForAll() {
+            try {
+                this.prices = []
+                const resp = await axios.get('http://localhost:8080/prices');
+                customers.forEach(c => {
+                    const includedDiscounts = (resp.data.length == 0) ? [] : resp.data.discounts.filter(d => d.customer_ids.includes(c.id));
+                    const includedSales = (resp.data.length == 0) ? [] : resp.data.sales.filter(s => s.customer_id.includes(c.id));
+                    this.calculatePrices(c.id, includedDiscounts, includedSales);
+                })
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            };
+        },
+        calculatePrices(id, disData, saleData) {
+            let initPrices = JSON.parse(JSON.stringify(this.products));
+            initPrices.forEach(p => {
+                p['customer_id'] = id;
+            });
+
+            if (disData.length == 0) {this.prices.push(...initPrices); return 0;}
+            const today = new Date();
+
+            initPrices.forEach(price => {
+                const included = disData.filter(d => d.product_ids.includes(price.id))
+                included.forEach(dis => {
+                    console.log(dis);
+                    if (dis.type == 'none') {
+                        price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
+                    }
+                    else if (dis.type == 'season') {
+                        if (dis.start_date <= today && today <= dis.end_date) {
+                            price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
+                        }
+                    }
+                    else {
+                        const l1 = dis.product_ids.length;
+                        let sum = 0;
+                        if (l1 > price.id) {
+                            saleData.forEach(sale => {
+                                const priceSale = parseFloat(this.products.find(p => p.id == sale.product_id).price);
+                                sum += priceSale * parseFloat(sale.count);
+                            })
+                        }
+                        else {
+                            saleData.filter(s => s.product_id != dis.product_ids).forEach(sale => {
+                                const priceSale = parseFloat(this.products.find(p => p.id == sale.product_id).price);
+                                sum += priceSale * parseFloat(sale.count);
+                            })
+                        }
+                        if (sum >= dis.sales) {
+                            price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
+                        }
+                    }
+                });
+
+                this.prices.push({ ...price });
+            });
+        },
+    },
+};
+</script>

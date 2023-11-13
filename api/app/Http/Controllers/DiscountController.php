@@ -10,22 +10,23 @@ class DiscountController extends Controller
     public function index()
     {
         $discounts = Discount::all();
-        return view('discount', ['discounts' => $discounts]);
+        return response()->json($discounts);
     }
 
     public function postDiscount(Request $request)
     {
         // Validate and process data
         $data = $request->validate([
-            'product_id' => 'required',
-            'customer_id' => 'required',
-            'amount' => 'required|numeric',
-            'type' => 'string',
-            'start_date' => 'date',
-            'end_date' => 'date|after:start_date',
+            'type' => 'required|string',
+            'product_ids' => 'required|string',
+            'customer_ids' => 'required|string',
+            'amount' => 'required|numeric|min:1|max:100',
+            'sales' => 'nullable|numeric|required_if:type,==,sales|min:1',
+            'start_date' => 'nullable|date|required_if:type,==,season',
+            'end_date' => 'nullable|date|after:start_date|required_if:type,==,season',
         ]);
-        Discount::create($data);
-        return redirect('/discounts');
+        $discount = Discount::create($data);
+        return response()->json($discount);
     }
 
     public function specificDiscount($id)
@@ -36,30 +37,24 @@ class DiscountController extends Controller
             abort(404);
         }
 
-        return view('specific_discount', ['discount' => $discount]);
-    }
-
-    public function edit($id)
-    {
-        $discount = Discount::findOrFail($id);
-        return view('discounts_edit', ['discount' => $discount]);
+        return response()->json($discount);
     }
 
     public function update(Request $request, $id)
     {
         $discount = Discount::findOrFail($id);
         $validatedData = $request->validate([
-            'product_id' => 'required',
-            'customer_id' => 'required',
-            'amount' => 'required|numeric',
-            'type' => 'string',
-            'start_date' => 'date',
-            'end_date' => 'date|after:start_date',
+            'product_ids' => 'required|string',
+            'customer_ids' => 'required|string',
+            'amount' => 'required|numeric|min:1',
+            'type' => 'required|string',
+            'sales' => 'nullable|numeric|required_if:type,==,sales',
+            'start_date' => 'nullable|date|required_if:type,==,season',
+            'end_date' => 'nullable|date|after:start_date|required_if:type,==,season',
         ]);
 
         $discount->update($validatedData);
-
-        return redirect('/discounts');
+        return response()->json($discount);
     }
 
     public function delete($id)
@@ -68,7 +63,7 @@ class DiscountController extends Controller
 
         if ($discount) {
             $discount->delete();
-            return redirect('/discounts');
+            return response()->json(null);
         } else {
             abort(404);
         }

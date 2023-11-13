@@ -30,3 +30,8 @@ Route::prefix('sales')->group(function () {
     Route::put('{id}', 'App\Http\Controllers\SaleController@update')->name('sales.update');
     Route::delete('{id}', 'App\Http\Controllers\SaleController@delete')->name('sales.delete');
 });
+
+Route::prefix('prices')->group(function() {
+    Route::get('{id}', 'App\Http\Controllers\PriceController@priceForOne')->name('price.one');
+    Route::get('/', 'App\Http\Controllers\PriceController@priceForAll')->name('price.index');
+});

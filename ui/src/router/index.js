@@ -1,29 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DiscountView from '../views/DiscountView.vue'
+import PriceView from '../views/PriceView.vue'
 import DataView from '../views/DataView.vue'
+import CreateSaleView from '../views/CreateSaleView.vue'
+import CreateDiscountView from '../views/CreateDiscountView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/discounts',
-      name: 'discounts',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: DiscountView
+      path: '/prices',
+      name: 'prices',
+      component: PriceView
     },
     {
       path: '/',
-      redirect: '/discounts'
+      redirect: '/prices'
     },
     {
       path: '/data',
       name: 'data',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: DataView
+    },
+    {
+      path: '/create-discount',
+      name: 'create-discount',
+      component: CreateDiscountView
+    },
+    {
+      path: '/create-sale',
+      name: 'create-sale',
+      component: CreateSaleView
     }
   ]
 })

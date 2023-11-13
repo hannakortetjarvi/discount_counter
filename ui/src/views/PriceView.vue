@@ -1,18 +1,18 @@
 <script setup>
-import DiscountTable from '../components/DiscountTable.vue'
+import PricesTable from '../components/PricesTable.vue'
 </script>
 
 <template>
   <main>
-    <p>Discounts</p>
+    <p>Prices</p>
     <select v-model="selected" class="selectItem">
       <option value="all" key=all>All Customers</option>
-      <option v-for="customer in customers" :value="customer.name" :key=customer.id>
+      <option v-for="customer in customers" :value="customer.id" :key=customer.id>
 		    {{ customer.name }}
 	    </option>
     </select>
 
-    <DiscountTable :type=selected />
+    <PricesTable :customer_id="selected" />
   </main>
 </template>
 

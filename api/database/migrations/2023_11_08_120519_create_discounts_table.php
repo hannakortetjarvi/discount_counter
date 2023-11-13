@@ -10,10 +10,11 @@ class CreateDiscountsTable extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->uuid('product_id');
-            $table->uuid('customer_id');
             $table->string('type');
+            $table->string('product_ids');
+            $table->string('customer_ids');
             $table->decimal('amount', $precision = 10, $scale = 2);
+            $table->integer('sales')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

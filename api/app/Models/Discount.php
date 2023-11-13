@@ -11,10 +11,11 @@ class Discount extends Model
 
     protected $table = 'discounts';
     protected $fillable = [
-        'product_id',
-        'customer_id',
+        'product_ids',
+        'customer_ids',
         'type',
         'amount',
+        'sales',
         'start_date',
         'end_date',
     ];
