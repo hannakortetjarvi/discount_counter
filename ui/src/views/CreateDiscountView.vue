@@ -1,4 +1,4 @@
-<template>
+30<template>
         <div class="popup-content">
             <h2>Add A New Discount</h2>
             <form @submit.prevent="createDiscount">
@@ -49,7 +49,7 @@ export default {
               customer_ids: 'all',
               product_ids: 'all',
               type: 'none',
-              amount: 0,
+              amount: 1,
               amount_type: 'percent',
               sales: null,
               start_date: null,
@@ -97,7 +97,7 @@ export default {
       emptyDiscount() {
         this.newDiscount.customer_ids= 'all';
         this.newDiscount.product_ids= 'all';
-        this.newDiscount.amount= 0;
+        this.newDiscount.amount= 1;
         this.newDiscount.sales= null;
         this.newDiscount.type= 'none';
         this.newDiscount.amount_type= 'percent';

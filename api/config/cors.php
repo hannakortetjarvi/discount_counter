@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['prices, prices/*, api/*', 'sanctum/csrf-cookie', 'sales', 'sales/*', 'discounts', 'discounts/*'],
+    'paths' => ['prices', 'prices/*', 'api/*', 'sanctum/csrf-cookie', 'sales', 'sales/*', 'discounts', 'discounts/*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000'],
+    'allowed_origins' => ['http://localhost:3000', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://ui:3000'],
 
     'allowed_origins_patterns' => [],
 

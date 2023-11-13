@@ -9,7 +9,7 @@ class DiscountController extends Controller
 {
     public function index()
     {
-        $discounts = Discount::paginate();
+        $discounts = Discount::all();
         return response()->json($discounts);
     }
 
@@ -18,8 +18,8 @@ class DiscountController extends Controller
         // Validate and process data
         $data = $request->validate([
             'type' => 'required|string',
-            'product_ids' => 'required',
-            'customer_ids' => 'required',
+            'product_ids' => 'required|string',
+            'customer_ids' => 'required|string',
             'amount' => 'required|numeric|min:1|max:100',
             'sales' => 'nullable|numeric|required_if:type,==,sales|min:1',
             'start_date' => 'nullable|date|required_if:type,==,season',
@@ -44,8 +44,8 @@ class DiscountController extends Controller
     {
         $discount = Discount::findOrFail($id);
         $validatedData = $request->validate([
-            'product_ids' => 'required',
-            'customer_ids' => 'required',
+            'product_ids' => 'required|string',
+            'customer_ids' => 'required|string',
             'amount' => 'required|numeric|min:1',
             'type' => 'required|string',
             'sales' => 'nullable|numeric|required_if:type,==,sales',

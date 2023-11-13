@@ -53,7 +53,7 @@ export default {
             updatedSale: {
               customer_id: '',
               product_id: '',
-              count: 0,
+              count: 1,
             },
         }
     },
@@ -70,7 +70,7 @@ export default {
         try {
           const resp = await axios.get('http://localhost:8080/sales');
           console.log(resp);
-          this.sales = resp.data.data;
+          this.sales = resp.data;
         } catch (error) {
           console.error('Error fetching data:', error);
         };
@@ -88,6 +88,7 @@ export default {
           console.log('Sale updated successfully');
           this.showUpdateForm = false;
           this.fetchData();
+          this.closeUpdateForm();
         } catch (error) {
           console.error('Error updating sale:', error);
         }

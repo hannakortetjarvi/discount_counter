@@ -10,24 +10,26 @@ class PriceController extends Controller
 {
     public function priceForOne($id)
     {
-        $jsonId = json_decode($id);
-        $discounts = Discount::whereJsonContains('customer_ids', $jsonId);
-        $sales = Sale::where('customer_id', $jsonId);
+        $discounts = Discount::where('customer_ids', 'like', '%'.$id.'%')->get();
+        $sales = Sale::where('customer_id', $id)->get();
+
         $data = [
             'discounts' => $discounts,
             'sales' => $sales,
         ];
+
         return response()->json($data);
     }
 
     public function priceForAll()
     {
-        $discounts = Discount::paginate();
-        $sales = Sale::paginate();
+        $discounts = Discount::all();
+        $sales = Sale::all();
         $data = [
             'discounts' => $discounts,
             'sales' => $sales,
         ];
+
         return response()->json($data);
     }
 }

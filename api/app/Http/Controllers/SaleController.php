@@ -9,7 +9,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::paginate();
+        $sales = Sale::all();
         return response()->json($sales);
     }
 

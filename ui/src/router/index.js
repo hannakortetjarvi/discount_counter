@@ -14,7 +14,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      redirect: '/discounts'
+      redirect: '/prices'
     },
     {
       path: '/data',

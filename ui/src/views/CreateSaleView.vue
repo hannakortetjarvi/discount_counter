@@ -15,7 +15,7 @@
                 </select>
 
                 <label for="count">Count:</label>
-                <input type="number" v-model="newSale.count" required>
+                <input type="number" min="1" v-model="newSale.count" required>
 
                 <button type="submit">Add Sale</button>
             </form>
@@ -35,7 +35,7 @@ export default {
             newSale: {
               customer_id: '',
               product_id: '',
-              count: 0,
+              count: 1,
             },
         }
     },
@@ -48,7 +48,7 @@ export default {
         }
         this.newSale.customer_id = '';
         this.newSale.product_id = '';
-        this.newSale.count = 0;
+        this.newSale.count = 1;
       },
     },
 };

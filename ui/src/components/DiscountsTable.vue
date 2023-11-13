@@ -47,7 +47,7 @@ export default {
         try {
           const resp = await axios.get('http://localhost:8080/discounts');
           console.log(resp);
-          this.discounts = resp.data.data;
+          this.discounts = resp.data;
         } catch (error) {
           console.error('Error fetching data:', error);
         };
