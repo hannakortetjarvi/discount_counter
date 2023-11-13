@@ -23,11 +23,13 @@
                     </option>
                 </select>
 
-                Amount
+                Amount of discount:
                 <input type="number" min="1" max="100" v-model="newDiscount.amount" required> %
 
                 <input v-if="newDiscount.type == 'season'" type="date" v-model="newDiscount.start_date">
                 <input v-if="newDiscount.type == 'season'" type="date" v-model="newDiscount.end_date">
+
+                <p v-if="newDiscount.type == 'sales'">Amount of Sales (€):</p>
                 <input v-if="newDiscount.type == 'sales'" type="number" min="1" v-model="newDiscount.sales">
 
                 <button type="submit">Add Discount</button>

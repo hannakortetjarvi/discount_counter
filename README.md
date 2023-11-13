@@ -17,13 +17,16 @@ bash start.sh
 #### First run inside ./api
 ```sh
 php artisan key:generate
-composer install --ignore-platform-reqs
+composer install --prefer-dist
 ```
 
 #### Run on the project root
 ```sh
 docker-compose up --build -d
+docker exec discount-api php artisan config:clear
+docker exec discount-api php artisan route:cache
 docker exec discount-api php artisan migrate
+docker exec discount-api php artisan optimize
 ```
 
 ## After installing the project, it can be started again with

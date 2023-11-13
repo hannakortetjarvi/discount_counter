@@ -18,8 +18,8 @@ class DiscountController extends Controller
         // Validate and process data
         $data = $request->validate([
             'type' => 'required|string',
-            'product_ids' => 'required|string',
-            'customer_ids' => 'required|string',
+            'product_ids' => 'required',
+            'customer_ids' => 'required',
             'amount' => 'required|numeric|min:1|max:100',
             'sales' => 'nullable|numeric|required_if:type,==,sales|min:1',
             'start_date' => 'nullable|date|required_if:type,==,season',

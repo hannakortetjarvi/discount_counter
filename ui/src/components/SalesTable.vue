@@ -97,7 +97,6 @@ export default {
         const userConfirmed = window.confirm('Are you sure you want to delete this sale?');
 
         if (userConfirmed) {
-        // If the user confirms, proceed with deletion
           await this.delete(saleId);
         }
       },
@@ -106,7 +105,6 @@ export default {
         try {
           await axios.delete('http://localhost:8080/sales/${saleId}', {withCredentials: true});
           console.log('Sale deleted successfully');
-        // Refresh the sales data after deletion
           this.fetchData();
         } catch (error) {
           console.error('Error deleting sale:', error);
