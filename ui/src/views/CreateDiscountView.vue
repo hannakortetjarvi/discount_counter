@@ -11,14 +11,14 @@
 
                 <select v-if="newDiscount.type == 'none'" v-model="newDiscount.customer_ids" class="selectItem">
                     <option value="all">All Customers</option>
-                    <option v-for="customer in customers" :value="customer.id">
+                    <option v-for="customer in customers" :value="customer.id" :key="customer.id">
                         {{customer.id}} | {{customer.name}}
                     </option>
                 </select>
 
                 <select v-model="newDiscount.product_ids" class="selectItem">
                     <option value="all">All products</option>
-                    <option v-for="product in products" :value="product.id">
+                    <option v-for="product in products" :value="product.id" :key="product.id">
                         {{product.id}} | {{product.name}} | {{product.price}}€
                     </option>
                 </select>

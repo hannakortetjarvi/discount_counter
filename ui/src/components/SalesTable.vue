@@ -102,7 +102,7 @@ export default {
         }
       },
       async delete(saleId) {
-      // Implement logic to delete the sale
+        console.log(saleId);
         try {
           await axios.delete('http://localhost:8080/sales/${saleId}', {withCredentials: true});
           console.log('Sale deleted successfully');

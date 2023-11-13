@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +32,6 @@ Route::prefix('sales')->group(function () {
 });
 
 Route::prefix('prices')->group(function() {
-    Route::get('/{id}', 'App\Http\Controllers\PriceController@priceForOne')->name('price.one');
+    Route::get('{id}', 'App\Http\Controllers\PriceController@priceForOne')->name('price.one');
     Route::get('/', 'App\Http\Controllers\PriceController@priceForAll')->name('price.index');
 });

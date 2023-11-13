@@ -9,10 +9,10 @@ import DiscountsTable from '../components/DiscountsTable.vue'
   <div class="data">
     <p>Data</p>
     <select v-model="selected" class="selectItem">
-      <option value="customers" key=all>Customers</option>
-      <option value="products" key=all>Products</option>
-      <option value="sales" key=all>Sales</option>
-      <option value="discounts" key=all>Discounts</option>
+      <option value="customers" key=customers>Customers</option>
+      <option value="products" key=products>Products</option>
+      <option value="sales" key=sales>Sales</option>
+      <option value="discounts" key=discounts>Discounts</option>
     </select>
 
     <CustomersTable v-if="selected == 'customers'" />

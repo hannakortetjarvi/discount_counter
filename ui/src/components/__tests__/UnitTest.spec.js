@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import GreetingItem from '../GreetingItem.vue'
-import DiscountView from '../../views/DiscountView.vue'
+import DiscountView from '../../views/DataView.vue'
 
 describe('Greeting', () => {
   it('Renders greeting', () => {
@@ -20,6 +20,6 @@ describe('Greeting', () => {
     const wrapper = mount(DiscountView);
     const selectElement = wrapper.find('select.selectItem');
     const optionElements = selectElement.findAll('option');
-    expect(optionElements[0].text()).toBe('All Customers');
+    expect(optionElements[0].text()).toBe('Customers');
   });
 })

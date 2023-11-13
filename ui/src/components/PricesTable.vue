@@ -43,7 +43,7 @@ export default {
             this.initFetch();
         },
         prices: function(newVal, oldVal) {
-            console.log('Update prices');
+            console.log('Update prices', oldVal, ' --> ', newVal);
         },
     },
     methods: {

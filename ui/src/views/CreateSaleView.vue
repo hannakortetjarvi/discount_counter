@@ -3,13 +3,13 @@
             <h2>Add A New Sale</h2>
             <form @submit.prevent="createSale">
                 <select v-model="newSale.customer_id" class="selectItem">
-                    <option v-for="customer in customers" :value="customer.id">
+                    <option v-for="customer in customers" :value="customer.id" :key="customer.id">
                         {{customer.id}} | {{customer.name}}
                     </option>
                 </select>
 
                 <select v-model="newSale.product_id" class="selectItem">
-                    <option v-for="product in products" :value="product.id">
+                    <option v-for="product in products" :value="product.id" :key="product.id">
                         {{product.id}} | {{product.name}} | {{product.price}}€
                     </option>
                 </select>

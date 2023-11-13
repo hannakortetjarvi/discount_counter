@@ -1,5 +1,4 @@
 <script setup>
-import DiscountsTable from '../components/DiscountsTable.vue'
 import PricesTable from '../components/PricesTable.vue'
 </script>
 

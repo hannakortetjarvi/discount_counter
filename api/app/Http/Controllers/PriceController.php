@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Discount;
 use App\Models\Sale;
 
@@ -10,7 +9,7 @@ class PriceController extends Controller
 {
     public function priceForOne($id)
     {
-        $discounts = Discount::where('customer_ids', 'like', '%'.$id.'%')->get();
+        $discounts = Discount::where('customer_ids', 'like', '%' . $id . '%')->get();
         $sales = Sale::where('customer_id', $id)->get();
 
         $data = [
