@@ -50,7 +50,7 @@ class SaleUnitTest extends TestCase
         
         // Check that sale has been deleted
         $this->assertDatabaseMissing('sales', [
-            'product_id' => 'new-product-id',
+            'product_id' => '675bd420-8c05-4879-8f95-3cdaa9815c92',
             'count' => 10,
         ]);
     }
