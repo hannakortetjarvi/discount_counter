@@ -8,6 +8,6 @@ RUN docker-php-ext-install pdo_pgsql
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 WORKDIR /api
 
-# start api in port 8000
-EXPOSE 8080
+# start api
+EXPOSE 8000
 CMD php artisan serve --host=0.0.0.0 --port=8000
