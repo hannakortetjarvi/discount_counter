@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import GreetingItem from '../GreetingItem.vue'
 import DiscountView from '../../views/DataView.vue'
+import PricesTable from '../PricesTable.vue'
 
 describe('Greeting', () => {
   it('Renders greeting', () => {
@@ -12,7 +13,6 @@ describe('Greeting', () => {
 
   it('Initializes selection', () => {
     const wrapper = mount(DiscountView)
-
     expect(wrapper.find('select.selectItem').exists()).toBe(true)
   })
 
