@@ -10,7 +10,7 @@
             <th>Original Price (€)</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody ref="priceTable">
           <tr v-for="price in prices" :key="price.product_id">
             <td>{{ customers.find(c => c.id == price.customer_id).name }}</td>
             <td>{{ price.customer_id }}</td>
@@ -34,7 +34,7 @@ export default {
         return {
             prices: [],
             products: products,
-            customers: customers,
+            customers: customers
         }
     },
     mounted() {
@@ -51,11 +51,18 @@ export default {
     },
     methods: {
         async initFetch() {
+            let loader = this.$loading.show({
+                container: this.$refs.priceTable,
+            });
             if (this.customer_id == 'all') {
                 await this.fetchPricesForAll();
             } else {
                 await this.fetchPricesForOne();
             }
+            loader.hide();
+        },
+        onCancel() {
+                console.log('User cancelled the loader.')
         },
         async fetchPricesForOne() {
             try {

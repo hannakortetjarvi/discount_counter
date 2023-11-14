@@ -79,6 +79,7 @@ export default {
     },
     methods: {
       async createDiscount() {
+        let loader = this.$loading.show({});
         if (this.selectedType == 'none') {
           this.newDiscount.sales = null;
           this.newDiscount.start_date = null;
@@ -108,8 +109,14 @@ export default {
 
         try {
           await axios.post('http://localhost:8080/discounts', this.newDiscount, {withCredentials: true,});
+          loader.hide();
+          this.$toast.success(`New Discount Created!`, {
+            duration: 6000,
+          });
         } catch (error) {
-          console.error('Error creating discount:', error);
+          this.$toast.error(`Error Occurred!`, {
+            duration: 6000,
+          });
         }
         
         this.emptyDiscount();

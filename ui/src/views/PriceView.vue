@@ -9,7 +9,7 @@ import PricesTable from '../components/PricesTable.vue'
     <select v-model="selected" class="selectItem">
       <option value="all" key=all>All Customers</option>
       <option v-for="customer in customers" :value="customer.id" :key=customer.id>
-		    {{ customer.name }}
+		    {{ customer.name }} | {{ customer.id }}
 	    </option>
     </select>
 

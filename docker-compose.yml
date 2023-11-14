@@ -18,7 +18,7 @@ services:
     build: ui
     container_name: discount-ui
     ports:
-        - 3000:8080
+        - 3000:3000
     volumes:
       - ./ui/src:/ui/src
     depends_on:

@@ -36,7 +36,6 @@
 import axios from 'axios'
 import customers from '../../data/customers.json'
 import products from '../../data/products.json'
-import 'vue-toast-notification/dist/theme-sugar.css';
 
 export default {
     data() {
@@ -52,8 +51,10 @@ export default {
     },
     methods: {
       async createSale() {
+        let loader = this.$loading.show({});
         try {
           await axios.post('http://localhost:8080/sales', this.newSale, {withCredentials: true,})
+          loader.hide();
           this.$toast.success(`New Sale Added!`, {
             duration: 6000,
           });

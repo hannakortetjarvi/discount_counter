@@ -1,52 +1,64 @@
 <template>
+          <div v-if="showUpdateForm" class="discount-update">
+            <h2>Update Discount</h2>
+            <form @submit.prevent="createDiscount">
+                <div class="form-div">
+                <div class="radio">
+                  Additional input:
+                  <input type="radio" value="none" v-model="updatedDiscount.type"> None
+                  <input type="radio" value="season" v-model="updatedDiscount.type"> Discount timeframe
+                  <input type="radio" value="sales" v-model="updatedDiscount.type"> Amount of sales
+                </div>
+
+                <div v-if="updatedDiscount.type == 'none'">
+                  Customer(s):
+                <select v-model="updatedDiscount.customer_ids" class="selectItem">
+                    <option value="all">All Customers</option>
+                    <option v-for="customer in customers" :value="customer.id" :key="customer.id">
+                        {{customer.id}} | {{customer.name}}
+                    </option>
+                </select>
+                </div>
+
+                <div>
+                  Product(s):
+                <select v-model="updatedDiscount.product_ids" class="selectItem">
+                    <option value="all">All products</option>
+                    <option v-for="product in products" :value="product.id" :key="product.id">
+                        {{product.id}} | {{product.name}} | {{product.price}}€
+                    </option>
+                </select>
+                </div>
+
+                <div>
+                Amount of Discount:
+                <input type="number" min="1" max="100" v-model="updatedDiscount.amount" required> %
+                </div>
+
+                <div v-if="updatedDiscount.type == 'season'">
+                  Start date:
+                <input  type="date" v-model="updatedDiscount.start_date">
+                </div>
+                
+                <div v-if="updatedDiscount.type == 'season'">
+                  End date:
+                <input type="date" v-model="updatedDiscount.end_date">
+                </div>
+
+                <div v-if="updatedDiscount.type == 'sales'">
+                  Amount of Sales:
+                <input type="number" min="1" v-model="updatedDiscount.sales">€
+                </div>
+                
+                <div>
+                  <button type="submit">Update</button>
+                  <button class="close" @click="closeUpdateForm">Close</button>
+                </div>
+              </div>
+            </form>
+        </div>
     <table>
         <thead>
-          <div v-if="showUpdateForm" class="popup">
-              <div class="popup-content">
-                  <h2>Update Discount</h2>
-                  <form @submit.prevent="updateDiscount">
-
-                      <div v-if="updatedDiscount.type == 'none'">
-                      <label for="customer_id">Customer:</label>
-                      <select  v-model="updatedDiscount.customer_ids" class="selectItem">
-                        <option value="all">All Customers</option>
-                        <option v-for="customer in customers" :value="customer.id" :key="customer.id">
-                          {{customer.id}} | {{customer.name}}
-                        </option>
-                      </select>
-                      </div>
-
-                      <label for="product_id">Product:</label>
-                      <select v-model="updatedDiscount.product_ids" class="selectItem">
-                        <option value="all">All products</option>
-                        <option v-for="product in products" :value="product.id" :key="product.id">
-                          {{product.id}} | {{product.name}} | {{product.price}}€
-                        </option>
-                      </select>
-
-                      <label for="amount">Amount (%):</label>
-                      <input type="number" v-model="updatedDiscount.amount" required>
-
-                      <div v-if="updatedDiscount.type == 'sales'">
-                        <label for="sales">Sales (€):</label>
-                        <input type="number" v-model="updatedDiscount.sales" required>
-                      </div>
-
-                      <div v-if="updatedDiscount.type == 'season'">
-                        <label for="start_date">Start date:</label>
-                        <input type="date" v-model="updatedDiscount.start_date" required>
-                      </div>
-
-                      <div v-if="updatedDiscount.type == 'season'">
-                        <label for="end_date">End date:</label>
-                        <input type="date" v-model="updatedDiscount.end_date" required>
-                      </div>
-
-                      <button class="close" @click="closeUpdateForm">Close</button>
-                      <button type="submit">Update</button>
-                  </form>
-              </div>
-          </div>
           <tr>
             <th>Discount Id</th>
             <th>Type</th>
@@ -109,6 +121,9 @@ export default {
     },
     methods: {
       async fetchData() {
+        let loader = this.$loading.show({
+                container: this.$refs.priceTable,
+        });
         try {
           const resp = await axios.get('http://localhost:8080/discounts');
           console.log(resp);
@@ -120,6 +135,7 @@ export default {
         } catch (error) {
           console.error('Error fetching data:', error);
         };
+        loader.hide();
       },
       openForm(discount) {
         this.updatedDiscount = { ...discount };
@@ -129,6 +145,7 @@ export default {
         this.showUpdateForm = false;
       },
       async updateDiscount() {
+        let loader = this.$loading.show({});
         if (this.updatedDiscount.type == 'none') {
           this.updatedDiscount.sales = null;
           this.updatedDiscount.start_date = null;
@@ -156,12 +173,17 @@ export default {
 
         try {
           await axios.put(`http://localhost:8080/discounts/${this.updatedDiscount.id}`, this.updatedDiscount, {withCredentials: true});
-          console.log('Discount updated successfully');
           this.showUpdateForm = false;
           this.fetchData();
+          loader.hide();
+          this.$toast.success(`Discount Updated!`, {
+            duration: 6000,
+          });
           this.closeUpdateForm();
         } catch (error) {
-          console.error('Error updating discount:', error);
+          this.$toast.error(`Error Occurred!`, {
+            duration: 6000,
+          });
         }
         this.emptyDiscount();
       },
@@ -185,14 +207,35 @@ export default {
       },
       async delete(discountId) {
         console.log(discountId);
+        let loader = this.$loading.show({});
         try {
           await axios.delete(`http://localhost:8080/discounts/${discountId}`, {withCredentials: true});
-          console.log('Discount deleted successfully');
           this.fetchData();
+          loader.hide();
+          this.$toast.success(`Discount Deleted!`, {
+            duration: 6000,
+          });
         } catch (error) {
-          console.error('Error deleting discount:', error);
+          this.$toast.error(`Error Occurred!`, {
+            duration: 6000,
+          });
         }
       },
     },
 };
 </script>
+
+<style>
+
+.close {
+  margin-left: 5px;
+}
+
+.discount-update {
+  border: 1px dotted black;
+  padding: 10px;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+</style>

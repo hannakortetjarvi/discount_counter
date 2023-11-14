@@ -1,38 +1,46 @@
 <template>
+          <div v-if="showUpdateForm" class="sale-update">
+            <h2>Update Sale</h2>
+            <form @submit.prevent="updateSale">
+              <div class="form-div">
+                <div>
+                  Customer:
+                <select v-model="updatedSale.customer_id" class="selectItem">
+                    <option v-for="customer in customers" :value="customer.id" :key="customer.id">
+                        {{customer.id}} | {{customer.name}}
+                    </option>
+                </select>
+                </div>
+
+                <div>
+                  Product:
+                <select v-model="updatedSale.product_id" class="selectItem">
+                    <option v-for="product in products" :value="product.id" :key="product.id">
+                        {{product.id}} | {{product.name}} | {{product.price}}€
+                    </option>
+                </select>
+                </div>
+
+                <div>
+                <label for="count">Amount of Items Sold: </label>
+                <input type="number" min="1" v-model="updatedSale.count" required>
+                </div>
+
+                <div>
+                  <button type="submit">Update</button>
+                  <button class="close" @click="closeUpdateForm">Close</button>
+                </div>
+              </div>
+            </form>
+        </div>
     <table>
         <thead>
-          <div v-if="showUpdateForm" class="popup">
-              <div class="popup-content">
-                  <h2>Update Sale</h2>
-                  <form @submit.prevent="updateSale">
 
-                    <label for="customer_id">Customer:</label>
-                    <select v-model="updatedSale.customer_id" class="selectItem">
-                      <option v-for="customer in customers" :value="customer.id" :key="customer.id">
-                        {{customer.id}} | {{customer.name}}
-                      </option>
-                    </select>
-
-                    <label for="product_id">Product:</label>
-                    <select v-model="updatedSale.product_id" class="selectItem">
-                      <option v-for="product in products" :value="product.id" :key="product.id">
-                        {{product.id}} | {{product.name}} | {{product.price}}€
-                      </option>
-                    </select>
-
-                      <label for="count">Count:</label>
-                      <input type="number" v-model="updatedSale.count" required>
-
-                      <button class="close" @click="closeUpdateForm">Close</button>
-                      <button type="submit">Update</button>
-                  </form>
-              </div>
-          </div>
           <tr>
             <th>Sale Id</th>
             <th>Customer Id</th>
             <th>Product Id</th>
-            <th>Count (how many products)</th>
+            <th>Item Count</th>
           </tr>
         </thead>
         <tbody>
@@ -41,10 +49,8 @@
             <td>{{ sale.customer_id }}</td>
             <td>{{ sale.product_id }}</td>
             <td>{{ sale.count}}</td>
-            <td>
-              <button @click="openForm(sale)">Update</button>
-              <button @click="confirmDelete(sale.id)">Delete</button>
-            </td>
+            <button @click="openForm(sale)">Update</button>
+            <button @click="confirmDelete(sale.id)">Delete</button>
           </tr>
         </tbody>
       </table>
@@ -80,6 +86,7 @@ export default {
     },
     methods: {
       async fetchData() {
+        let loader = this.$loading.show({});
         try {
           const resp = await axios.get('http://localhost:8080/sales');
           console.log(resp);
@@ -87,6 +94,7 @@ export default {
         } catch (error) {
           console.error('Error fetching data:', error);
         };
+        loader.hide();
       },
       openForm(sale) {
         this.updatedSale = { ...sale };
@@ -96,18 +104,24 @@ export default {
         this.showUpdateForm = false;
       },
       async updateSale() {
+        let loader = this.$loading.show({});
         try {
           await axios.put(`http://localhost:8080/sales/${this.updatedSale.id}`, this.updatedSale, {withCredentials: true});
-          console.log('Sale updated successfully');
           this.showUpdateForm = false;
           this.fetchData();
+          loader.hide();
+          this.$toast.success(`Sale Updated!`, {
+            duration: 6000,
+          });
           this.closeUpdateForm();
           this.updatedSale.id = 0,
           this.updatedSale.customer_id = '';
           this.updatedSale.product_id = '';
           this.updatedSale.count = 1;
         } catch (error) {
-          console.error('Error updating sale:', error);
+          this.$toast.error(`Error Occurred!`, {
+            duration: 6000,
+          });
         }
       },
       async confirmDelete(saleId) {
@@ -118,15 +132,36 @@ export default {
         }
       },
       async delete(saleId) {
+        let loader = this.$loading.show({});
         console.log(saleId);
         try {
           await axios.delete(`http://localhost:8080/sales/${saleId}`, {withCredentials: true});
-          console.log('Sale deleted successfully');
           this.fetchData();
+          loader.hide();
+          this.$toast.success(`Sale Deleted!`, {
+            duration: 6000,
+          });
         } catch (error) {
-          console.error('Error deleting sale:', error);
+          this.$toast.error(`Error Occurred!`, {
+            duration: 6000,
+          });
         }
       },
     },
 };
 </script>
+
+<style>
+
+.close {
+  margin-left: 5px;
+}
+
+.sale-update {
+  border: 1px dotted black;
+  padding: 10px;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+</style>
