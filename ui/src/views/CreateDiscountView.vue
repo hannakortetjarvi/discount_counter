@@ -37,7 +37,7 @@
 
                 <div v-if="newDiscount.type == 'season'">
                   Start date:
-                <input  type="date" v-model="newDiscount.start_date">
+                <input min="1" type="date" v-model="newDiscount.start_date">
                 </div>
                 
                 <div v-if="newDiscount.type == 'season'">
@@ -47,7 +47,7 @@
 
                 <div v-if="newDiscount.type == 'sales'">
                   Amount of Sales:
-                <input type="number" min="1" v-model="newDiscount.sales">€
+                <input type="number" v-model="newDiscount.sales">€
                 </div>
                 <button type="submit">Add Discount</button>
               </div>
@@ -79,16 +79,47 @@ export default {
     },
     methods: {
       async createDiscount() {
+        if (this.newDiscount.type == 'season' && this.newDiscount.start_date == null) {
+          this.$toast.error(`Missing Start Date!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newDiscount.type == 'season' && this.newDiscount.end_date == null) {
+          this.$toast.error(`Missing End Date!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newDiscount.amount == undefined || this.newDiscount.amount < 1) {
+          this.$toast.error(`Discount amount needs to be atleast 1%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newDiscount.amount > 100) {
+          this.$toast.error(`Discount amount needs to be smaller than 100%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newDiscount.type == 'sales' && (this.newDiscount.sales == undefined || this.newDiscount.amount < 1)) {
+          this.$toast.error(`Discount amount needs to be atleast 1%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
         let loader = this.$loading.show({});
-        if (this.selectedType == 'none') {
+        if (this.newDiscount.type == 'none') {
           this.newDiscount.sales = null;
           this.newDiscount.start_date = null;
           this.newDiscount.end_date = null;
         }
-        else if (this.selectedType == 'season') {
+        else if (this.newDiscount.type == 'season') {
           this.newDiscount.sales = null;
         }
-        else if (this.selectedType == 'sales') {
+        else if (this.newDiscount.type == 'sales') {
           this.newDiscount.start_date = null;
           this.newDiscount.end_date = null;
         }
@@ -106,6 +137,8 @@ export default {
         }
 
         console.log(this.newDiscount);
+        this.newDiscount.amount.replace(",",".");
+        this.newDiscount.sales.replace(",",".");
 
         try {
           await axios.post('http://localhost:8080/discounts', this.newDiscount, {withCredentials: true,});
@@ -125,7 +158,7 @@ export default {
         this.newDiscount.customer_ids= 'all';
         this.newDiscount.product_ids= 'all';
         this.newDiscount.amount= 1;
-        this.newDiscount.sales= null;
+        this.newDiscount.sales= 1;
         this.newDiscount.type= 'none';
         this.newDiscount.amount_type= 'percent';
         this.newDiscount.start_date= null;

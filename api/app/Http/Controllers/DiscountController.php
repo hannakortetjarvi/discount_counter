@@ -21,7 +21,7 @@ class DiscountController extends Controller
             'product_ids' => 'required',
             'customer_ids' => 'required',
             'amount' => 'required|numeric|min:1|max:100',
-            'sales' => 'nullable|numeric|required_if:type,==,sales|min:1',
+            'sales' => 'nullable|numeric',
             'start_date' => 'nullable|date|required_if:type,==,season',
             'end_date' => 'nullable|date|after:start_date|required_if:type,==,season',
         ]);
@@ -48,7 +48,7 @@ class DiscountController extends Controller
             'customer_ids' => 'required|string',
             'amount' => 'required|numeric|min:1',
             'type' => 'required|string',
-            'sales' => 'nullable|numeric|required_if:type,==,sales',
+            'sales' => 'nullable|numeric',
             'start_date' => 'nullable|date|required_if:type,==,season',
             'end_date' => 'nullable|date|after:start_date|required_if:type,==,season',
         ]);

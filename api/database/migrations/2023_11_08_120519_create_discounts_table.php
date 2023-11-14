@@ -13,8 +13,8 @@ class CreateDiscountsTable extends Migration
             $table->string('type');
             $table->longText('product_ids');
             $table->longText('customer_ids');
-            $table->decimal('amount', $precision = 10, $scale = 2);
-            $table->decimal('sales', $precision = 10, $scale = 2)->nullable();
+            $table->decimal('amount', $precision = 5, $scale = 2);
+            $table->decimal('sales', $precision = 100, $scale = 2)->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->timestamps();

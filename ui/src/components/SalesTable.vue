@@ -104,6 +104,32 @@ export default {
         this.showUpdateForm = false;
       },
       async updateSale() {
+        if (!Number.isInteger(this.updatedSale.count)) {
+          this.$toast.error(`Amount of items needs to be whole number!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
+        if (updatedSale.customer_id == '') {
+          this.$toast.error(`Missing Customer Id!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (updatedSale.product_id == '') {
+          this.$toast.error(`Missing Product Id!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.updatedSale.count == undefined || this.updatedSale.count < 1) {
+          this.$toast.error(`Amount of items sold needs to be atleast 1!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
         let loader = this.$loading.show({});
         try {
           await axios.put(`http://localhost:8080/sales/${this.updatedSale.id}`, this.updatedSale, {withCredentials: true});

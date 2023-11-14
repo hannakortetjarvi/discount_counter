@@ -98,7 +98,6 @@ export default {
             initPrices.forEach(price => {
                 const included = disData.filter(d => d.product_ids.includes(price.id))
                 included.forEach(dis => {
-                    console.log(dis);
                     if (dis.type == 'none') {
                         price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
                     }
@@ -125,10 +124,11 @@ export default {
                             })
                         }
                         if (sum >= dis.sales) {
-                            price.price = (parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00))).toFixed(2);
+                            price.price = (parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00)));
                         }
                     }
                 });
+                price.price = price.price.toFixed(2);
 
                 this.prices.push({ ...price });
             });

@@ -1,14 +1,8 @@
 <template>
           <div v-if="showUpdateForm" class="discount-update">
             <h2>Update Discount</h2>
-            <form @submit.prevent="createDiscount">
+            <form @submit.prevent="updateDiscount">
                 <div class="form-div">
-                <div class="radio">
-                  Additional input:
-                  <input type="radio" value="none" v-model="updatedDiscount.type"> None
-                  <input type="radio" value="season" v-model="updatedDiscount.type"> Discount timeframe
-                  <input type="radio" value="sales" v-model="updatedDiscount.type"> Amount of sales
-                </div>
 
                 <div v-if="updatedDiscount.type == 'none'">
                   Customer(s):
@@ -105,7 +99,7 @@ export default {
               customer_id: '',
               product_id: '',
               amount: 1,
-              sales: null,
+              sales: 0,
               start_date: null,
               end_date: null,
             },
@@ -129,8 +123,9 @@ export default {
           console.log(resp);
           this.discounts = resp.data;
           this.discounts.forEach(di => {
-            if (di.customer_ids.length > 36) di.customer_ids = "all"
-            if (di.product_ids.length > 36) di.product_ids = "all"
+            if (di.customer_ids.length > 36) di.customer_ids = "all";
+            if (di.product_ids.length > 36) di.product_ids = "all";
+            if (di.sales == 0) di.sales = null;
           });
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -145,14 +140,45 @@ export default {
         this.showUpdateForm = false;
       },
       async updateDiscount() {
+        if (this.updatedDiscount.type == 'season' && this.updatedDiscount.start_date == null) {
+          this.$toast.error(`Missing Start Date!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.updatedDiscount.type == 'season' && this.updatedDiscount.end_date == null) {
+          this.$toast.error(`Missing End Date!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.updatedDiscount.amount == undefined || this.updatedDiscount.amount < 1) {
+          this.$toast.error(`Discount amount needs to be atleast 1%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.updatedDiscount.amount > 100) {
+          this.$toast.error(`Discount amount needs to be smaller than 100%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.updatedDiscount.type == 'sales' && (this.updatedDiscount.sales == undefined || this.updatedDiscount.amount < 1)) {
+          this.$toast.error(`Discount amount needs to be atleast 1%!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
         let loader = this.$loading.show({});
         if (this.updatedDiscount.type == 'none') {
-          this.updatedDiscount.sales = null;
+          this.updatedDiscount.sales = 0;
           this.updatedDiscount.start_date = null;
           this.updatedDiscount.end_date = null;
         }
         else if (this.updatedDiscount.type == 'season') {
-          this.updatedDiscount.sales = null;
+          this.updatedDiscount.sales = 0;
         }
         else if (this.updatedDiscount.type == 'sales') {
           this.updatedDiscount.start_date = null;
@@ -170,6 +196,9 @@ export default {
         } else {
           this.updatedDiscount.product_ids = ([this.updatedDiscount.product_ids]).toString();
         }
+
+        this.updatedDiscount.amount.replace(",",".");
+        this.updatedDiscount.sales.replace(",",".");
 
         try {
           await axios.put(`http://localhost:8080/discounts/${this.updatedDiscount.id}`, this.updatedDiscount, {withCredentials: true});

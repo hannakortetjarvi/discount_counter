@@ -51,6 +51,32 @@ export default {
     },
     methods: {
       async createSale() {
+        if (this.newSale.customer_id == '') {
+          this.$toast.error(`Missing Customer Id!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newSale.product_id == '') {
+          this.$toast.error(`Missing Product Id!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+        if (this.newSale.count == undefined || this.newSale.count < 1) {
+          this.$toast.error(`Amount of items sold needs to be atleast 1!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
+        if (!Number.isInteger(this.newSale.count)) {
+          this.$toast.error(`Amount of items needs to be whole number!`, {
+            duration: 6000,
+          });
+          return 0;
+        }
+
         let loader = this.$loading.show({});
         try {
           await axios.post('http://localhost:8080/sales', this.newSale, {withCredentials: true,})
