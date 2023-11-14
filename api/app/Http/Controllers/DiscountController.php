@@ -9,7 +9,7 @@ class DiscountController extends Controller
 {
     public function index()
     {
-        $discounts = Discount::all();
+        $discounts = Discount::orderBy('id')->get();
         return response()->json($discounts);
     }
 

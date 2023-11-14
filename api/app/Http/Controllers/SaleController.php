@@ -9,7 +9,7 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = Sale::all();
+        $sales = Sale::orderBy('id')->get();
         return response()->json($sales);
     }
 

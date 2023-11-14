@@ -57,7 +57,7 @@ export default {
         async fetchPricesForOne() {
             try {
                 this.prices = []
-                const resp = await axios.get('http://localhost:8080/prices/${customer_id}');
+                const resp = await axios.get(`http://localhost:8080/prices/${this.customer_id}`);
                 this.calculatePrices(this.customer_id, resp.data.discounts, resp.data.sales);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -93,7 +93,9 @@ export default {
                         price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
                     }
                     else if (dis.type == 'season') {
-                        if (dis.start_date <= today && today <= dis.end_date) {
+                        const d_start = Date.parse(dis.start_date);
+                        const d_end = Date.parse(dis.end_date);
+                        if (d_start <= today && today <= d_end) {
                             price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
                         }
                     }
@@ -107,13 +109,13 @@ export default {
                             })
                         }
                         else {
-                            saleData.filter(s => s.product_id != dis.product_ids).forEach(sale => {
+                            saleData.filter(s => s.product_id == dis.product_ids).forEach(sale => {
                                 const priceSale = parseFloat(this.products.find(p => p.id == sale.product_id).price);
                                 sum += priceSale * parseFloat(sale.count);
                             })
                         }
                         if (sum >= dis.sales) {
-                            price.price = parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00));
+                            price.price = (parseFloat(price.price) - (parseFloat(price.price) * (parseFloat(dis.amount) / 100.00))).toFixed(2);
                         }
                     }
                 });

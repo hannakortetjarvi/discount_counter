@@ -10,8 +10,8 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_id');
-            $table->string('product_id');
+            $table->uuid('customer_id');
+            $table->uuid('product_id');
             $table->integer('count');
             $table->timestamps();
         });

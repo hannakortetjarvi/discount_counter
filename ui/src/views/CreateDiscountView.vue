@@ -53,7 +53,7 @@ export default {
               type: 'none',
               amount: 1,
               amount_type: 'percent',
-              sales: null,
+              sales: 1,
               start_date: null,
               end_date: null,
             },

@@ -10,7 +10,7 @@ class PriceController extends Controller
     public function priceForOne($id)
     {
         $discounts = Discount::where('customer_ids', 'like', '%' . $id . '%')->get();
-        $sales = Sale::where('customer_id', $id)->get();
+        $sales = Sale::where('customer_id', 'like', '%' . $id . '%')->get();
 
         $data = [
             'discounts' => $discounts,

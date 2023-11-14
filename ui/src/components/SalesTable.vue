@@ -6,11 +6,19 @@
                   <h2>Update Sale</h2>
                   <form @submit.prevent="updateSale">
 
-                    <label for="customer_id">Customer ID:</label>
-                    <input type="text" v-model="updatedSale.customer_id" required>
+                    <label for="customer_id">Customer:</label>
+                    <select v-model="updatedSale.customer_id" class="selectItem">
+                      <option v-for="customer in customers" :value="customer.id" :key="customer.id">
+                        {{customer.id}} | {{customer.name}}
+                      </option>
+                    </select>
 
-                      <label for="product_id">Product ID:</label>
-                      <input type="text" v-model="updatedSale.product_id" required>
+                    <label for="product_id">Product:</label>
+                    <select v-model="updatedSale.product_id" class="selectItem">
+                      <option v-for="product in products" :value="product.id" :key="product.id">
+                        {{product.id}} | {{product.name}} | {{product.price}}€
+                      </option>
+                    </select>
 
                       <label for="count">Count:</label>
                       <input type="number" v-model="updatedSale.count" required>
@@ -44,13 +52,18 @@
 
 <script>
 import axios from 'axios'
+import customers from '../../data/customers.json'
+import products from '../../data/products.json'
 
 export default {
     data() {
         return {
+            customers: customers,
+            products: products,
             sales: [],
             showUpdateForm: false,
             updatedSale: {
+              id: 0,
               customer_id: '',
               product_id: '',
               count: 1,
@@ -59,7 +72,7 @@ export default {
     },
     watch: { 
         products: function(newVal, oldVal) {
-            console.log('Data changed: ', oldVal.length, ' --> ', newVal.length)
+            console.log('Data changed: ', oldVal.length, ' --> ', newVal.length);
         }
     },
     mounted() {
@@ -84,11 +97,15 @@ export default {
       },
       async updateSale() {
         try {
-          await axios.put('http://localhost:8080/sales/${this.updatedSale.id}', this.updatedSale, {withCredentials: true});
+          await axios.put(`http://localhost:8080/sales/${this.updatedSale.id}`, this.updatedSale, {withCredentials: true});
           console.log('Sale updated successfully');
           this.showUpdateForm = false;
           this.fetchData();
           this.closeUpdateForm();
+          this.updatedSale.id = 0,
+          this.updatedSale.customer_id = '';
+          this.updatedSale.product_id = '';
+          this.updatedSale.count = 1;
         } catch (error) {
           console.error('Error updating sale:', error);
         }
@@ -103,7 +120,7 @@ export default {
       async delete(saleId) {
         console.log(saleId);
         try {
-          await axios.delete('http://localhost:8080/sales/${saleId}', {withCredentials: true});
+          await axios.delete(`http://localhost:8080/sales/${saleId}`, {withCredentials: true});
           console.log('Sale deleted successfully');
           this.fetchData();
         } catch (error) {
