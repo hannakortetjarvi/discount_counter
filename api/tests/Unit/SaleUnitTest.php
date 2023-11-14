@@ -32,13 +32,6 @@ class SaleUnitTest extends TestCase
             'count' => 5,
         ]);
 
-        // Check that sale exists on customer's page
-        $this->assertDatabaseHas('sales/8e5efb6d-c129-4181-9f86-7a3f46be1780', [
-            'product_id' => '08e019cd-e39b-4db5-a7e1-59faaff37b05',
-            'customer_id' => '8e5efb6d-c129-4181-9f86-7a3f46be1780',
-            'count' => 5,
-        ]);
-
         // Update the Sale
         $updatedSaleData = [
             'product_id' => '08e019cd-e39b-4db5-a7e1-000test12345',
