@@ -2,21 +2,19 @@
 
 ## Installation Guide (+ automatic start)
 
-### Install project on Linux (I used WSL)
+### 1. Create .env file in API folder from .env.example
 
+### 2. Install on Linux (WSL was used when creating this project)
 ```sh
 ./start.sh
 ```
 
-### Install project on Windows
-
+### OR 2. Install on Windows
 ```sh
 bash start.sh
 ```
 
-### Install project without script
-
-#### Create .env file in API folder
+## Install project without script
 
 #### First run inside ./api
 ```sh
@@ -41,4 +39,9 @@ docker compose down
 ## Run the project again (at root)
 ```sh
 docker compose up -d
+```
+
+## UI URL
+```sh
+http://localhost:3000
 ```
