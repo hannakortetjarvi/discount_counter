@@ -3,7 +3,8 @@ import PricesTable from '../components/PricesTable.vue'
 </script>
 
 <template>
-  <main>
+  <main class="prices">
+    <div class="table">
     <p>Prices</p>
     <select v-model="selected" class="selectItem">
       <option value="all" key=all>All Customers</option>
@@ -13,6 +14,7 @@ import PricesTable from '../components/PricesTable.vue'
     </select>
 
     <PricesTable :customer_id="selected" />
+    </div>
   </main>
 </template>
 
@@ -28,3 +30,20 @@ export default {
   }
 };
 </script>
+
+<style>
+
+.prices {
+  margin-top: 5em;
+}
+
+select {
+  margin-bottom: 1em;
+  width: 50%;
+}
+
+.table {
+  width: 1200px;
+}
+
+</style>

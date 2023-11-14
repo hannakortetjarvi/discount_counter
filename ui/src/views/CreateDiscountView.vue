@@ -1,38 +1,56 @@
 30<template>
-        <div class="popup-content">
-            <h2>Add A New Discount</h2>
+        <div class="discount-form">
+            <h2>Create A New Discount</h2>
             <form @submit.prevent="createDiscount">
-                <div>
-                  Additional input
+                <div class="form-div">
+                <div class="radio">
+                  Additional input:
                   <input type="radio" value="none" v-model="newDiscount.type"> None
                   <input type="radio" value="season" v-model="newDiscount.type"> Discount timeframe
                   <input type="radio" value="sales" v-model="newDiscount.type"> Amount of sales
                 </div>
 
-                <select v-if="newDiscount.type == 'none'" v-model="newDiscount.customer_ids" class="selectItem">
+                <div v-if="newDiscount.type == 'none'">
+                  Customer(s):
+                <select v-model="newDiscount.customer_ids" class="selectItem">
                     <option value="all">All Customers</option>
                     <option v-for="customer in customers" :value="customer.id" :key="customer.id">
                         {{customer.id}} | {{customer.name}}
                     </option>
                 </select>
+                </div>
 
+                <div>
+                  Product(s):
                 <select v-model="newDiscount.product_ids" class="selectItem">
                     <option value="all">All products</option>
                     <option v-for="product in products" :value="product.id" :key="product.id">
                         {{product.id}} | {{product.name}} | {{product.price}}€
                     </option>
                 </select>
+                </div>
 
-                Amount of discount:
+                <div>
+                Amount of Discount:
                 <input type="number" min="1" max="100" v-model="newDiscount.amount" required> %
+                </div>
 
-                <input v-if="newDiscount.type == 'season'" type="date" v-model="newDiscount.start_date">
-                <input v-if="newDiscount.type == 'season'" type="date" v-model="newDiscount.end_date">
+                <div v-if="newDiscount.type == 'season'">
+                  Start date:
+                <input  type="date" v-model="newDiscount.start_date">
+                </div>
+                
+                <div v-if="newDiscount.type == 'season'">
+                  End date:
+                <input type="date" v-model="newDiscount.end_date">
+                </div>
 
-                <p v-if="newDiscount.type == 'sales'">Amount of Sales (€):</p>
-                <input v-if="newDiscount.type == 'sales'" type="number" min="1" v-model="newDiscount.sales">
-
+                <div v-if="newDiscount.type == 'sales'">
+                  Amount of Sales:
+                <input type="number" min="1" v-model="newDiscount.sales">€
+                </div>
                 <button type="submit">Add Discount</button>
+              </div>
             </form>
         </div>
 </template>
@@ -109,3 +127,34 @@ export default {
     },
 };
 </script>
+
+<style>
+
+.discount-form {
+  margin-top: 5em;
+}
+
+.form-div {
+  display: grid;
+  height: 100%;
+  margin-top: 1em;
+  gap: 6px;
+}
+
+.form-div div {
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+select {
+  width: 100%;
+}
+
+button {
+  margin-top: 10px;
+}
+
+</style>

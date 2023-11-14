@@ -2,15 +2,17 @@
     <table>
         <thead>
           <tr>
+            <th>Customer Name</th>
             <th>Customer Id</th>
-            <th>Product Id</th>
             <th>Product Name</th>
-            <th>Discounted Price</th>
-            <th>Original Price</th>
+            <th>Product Id</th>
+            <th>Discounted Price (€)</th>
+            <th>Original Price (€)</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="price in prices" :key="price.product_id">
+            <td>{{ customers.find(c => c.id == price.customer_id).name }}</td>
             <td>{{ price.customer_id }}</td>
             <td>{{ price.id }}</td>
             <td>{{ price.name }}</td>
@@ -32,6 +34,7 @@ export default {
         return {
             prices: [],
             products: products,
+            customers: customers,
         }
     },
     mounted() {

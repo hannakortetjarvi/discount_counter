@@ -12,7 +12,7 @@
             <td>{{ customer.name }}</td>
           </tr>
         </tbody>
-      </table>
+    </table>
 </template>
 
 <script>
