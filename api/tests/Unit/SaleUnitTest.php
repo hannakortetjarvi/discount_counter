@@ -34,14 +34,14 @@ class SaleUnitTest extends TestCase
 
         // Update the Sale
         $updatedSaleData = [
-            'product_id' => '08e019cd-e39b-4db5-a7e1-000test12345',
+            'product_id' => '675bd420-8c05-4879-8f95-3cdaa9815c92',
             'count' => 123,
         ];
         $sale->update($updatedSaleData);
         
         // Check that the sale has been updated
         $this->assertDatabaseHas('sales', [
-            'product_id' => '08e019cd-e39b-4db5-a7e1-000test12345',
+            'product_id' => '675bd420-8c05-4879-8f95-3cdaa9815c92',
             'count' => 123,
         ]);
         
