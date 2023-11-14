@@ -12,7 +12,6 @@ describe('Greeting', () => {
 
   it('Initializes selection', () => {
     const wrapper = mount(DiscountView)
-
     expect(wrapper.find('select.selectItem').exists()).toBe(true)
   })
 
