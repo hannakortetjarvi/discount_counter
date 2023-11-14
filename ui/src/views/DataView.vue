@@ -7,18 +7,19 @@ import DiscountsTable from '../components/DiscountsTable.vue'
 
 <template>
   <div class="data">
-    <p>Data</p>
+    <p>Shown data:</p>
     <select v-model="selected" class="selectItem">
       <option value="customers" key=customers>Customers</option>
       <option value="products" key=products>Products</option>
       <option value="sales" key=sales>Sales</option>
       <option value="discounts" key=discounts>Discounts</option>
     </select>
-
-    <CustomersTable v-if="selected == 'customers'" />
-    <ProductsTable v-if="selected == 'products'" />
-    <SalesTable v-if="selected == 'sales'" />
-    <DiscountsTable v-if="selected == 'discounts'" />
+    <div class="table">
+      <CustomersTable v-if="selected == 'customers'" />
+      <ProductsTable v-if="selected == 'products'" />
+      <SalesTable v-if="selected == 'sales'" />
+      <DiscountsTable v-if="selected == 'discounts'" />
+    </div>
   </div>
 </template>
 
@@ -33,11 +34,16 @@ export default {
 </script>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.data {
+  margin-top: 5em;
+}
+
+select {
+  margin-bottom: 1em;
+  width: 50%;
+}
+
+.table {
+  width: 1200px;
 }
 </style>

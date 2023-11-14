@@ -13,7 +13,7 @@ describe('Visit page', () => {
 
   it('should visit data', () => {
     cy.visit('/data')
-    cy.contains('p', 'Data')
+    cy.contains('p', 'Shown data:')
   })
 })
 

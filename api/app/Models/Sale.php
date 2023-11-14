@@ -15,4 +15,9 @@ class Sale extends Model
         'product_id',
         'count',
     ];
+
+    protected $casts = [
+        'customer_id' => 'string',
+        'product_id' => 'string',
+    ];
 }

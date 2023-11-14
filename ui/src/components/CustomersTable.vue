@@ -1,18 +1,18 @@
 <template>
-    <table>
-        <thead>
-          <tr>
-            <th>Customer Id</th>
-            <th>Customer Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="customer in customers" :key="customer.id">
-            <td>{{ customer.id }}</td>
-            <td>{{ customer.name }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Customer Id</th>
+        <th>Customer Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="customer in customers" :key="customer.id">
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
@@ -25,9 +25,9 @@ export default {
     }
   },
   watch: { 
-        customers: function(newVal, oldVal) {
-          console.log('Data changed: ', oldVal.length, ' --> ', newVal.length)
-        }
+    customers: function(newVal, oldVal) {
+      console.log('Data changed: ', oldVal.length, ' --> ', newVal.length)
+    }
   }
 };
 </script>

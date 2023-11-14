@@ -10,7 +10,7 @@ class SalesTest extends TestCase
     use RefreshDatabase;
     
     /**
-     * A basic test example.
+     * Test if sales page exists
      *
      * @return void
      */
