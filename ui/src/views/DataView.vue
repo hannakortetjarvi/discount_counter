@@ -14,12 +14,11 @@ import DiscountsTable from '../components/DiscountsTable.vue'
       <option value="sales" key=sales>Sales</option>
       <option value="discounts" key=discounts>Discounts</option>
     </select>
-
     <div class="table">
-    <CustomersTable v-if="selected == 'customers'" />
-    <ProductsTable v-if="selected == 'products'" />
-    <SalesTable v-if="selected == 'sales'" />
-    <DiscountsTable v-if="selected == 'discounts'" />
+      <CustomersTable v-if="selected == 'customers'" />
+      <ProductsTable v-if="selected == 'products'" />
+      <SalesTable v-if="selected == 'sales'" />
+      <DiscountsTable v-if="selected == 'discounts'" />
     </div>
   </div>
 </template>
@@ -35,7 +34,6 @@ export default {
 </script>
 
 <style>
-
 .data {
   margin-top: 5em;
 }
@@ -48,5 +46,4 @@ select {
 .table {
   width: 1200px;
 }
-
 </style>

@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    // Get Every Sale
     public function index()
     {
         $sales = Sale::orderBy('id')->get();
         return response()->json($sales);
     }
 
+    // Post Sale
     public function postSale(Request $request)
     {
-        // Validate and process data
+        // Validate data
         $data = $request->validate([
             'product_id' => 'required',
             'customer_id' => 'required',
@@ -25,6 +27,7 @@ class SaleController extends Controller
         return response()->json($sale);
     }
 
+    // Get One Sale
     public function specificSale($id)
     {
         $sale = Sale::find($id);
@@ -36,9 +39,11 @@ class SaleController extends Controller
         return response()->json($sale);
     }
 
+    // Update Sale
     public function update(Request $request, $id)
     {
         $sale = Sale::findOrFail($id);
+        // Validate data
         $validatedData = $request->validate([
             'product_id' => 'required',
             'customer_id' => 'required',
@@ -49,6 +54,7 @@ class SaleController extends Controller
         return response()->json($sale);
     }
 
+    // Delete Sale
     public function delete($id)
     {
         $sale = Sale::find($id);

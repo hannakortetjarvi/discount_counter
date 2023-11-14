@@ -11,7 +11,7 @@ class SaleUnitTest extends TestCase
     use RefreshDatabase;
     
     /**
-     * A basic test example.
+     * Test adding Sale to database
      *
      * @return void
      */

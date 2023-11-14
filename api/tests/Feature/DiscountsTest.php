@@ -10,7 +10,7 @@ class DiscountsTest extends TestCase
     use RefreshDatabase;
     
     /**
-     * A basic test example.
+     * Test if discounts page exists
      *
      * @return void
      */

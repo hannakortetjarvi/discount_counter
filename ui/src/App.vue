@@ -7,14 +7,12 @@ import GreetingItem from './components/GreetingItem.vue'
   <header>
     <div class="wrapper">
       <GreetingItem msg="Discount Counter" />
-
       <nav>
         <RouterLink to="/prices">Prices</RouterLink>
         <RouterLink to="/data">Data</RouterLink>
         <RouterLink to="/create-discount">Create Discount</RouterLink>
         <RouterLink to="/create-sale">Add Sale</RouterLink>
       </nav>
-
     </div>
   </header>
 

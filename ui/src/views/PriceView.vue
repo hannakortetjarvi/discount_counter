@@ -12,7 +12,6 @@ import PricesTable from '../components/PricesTable.vue'
 		    {{ customer.name }} | {{ customer.id }}
 	    </option>
     </select>
-
     <PricesTable :customer_id="selected" />
     </div>
   </main>
