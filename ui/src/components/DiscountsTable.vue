@@ -184,6 +184,7 @@ export default {
       else if (this.updatedDiscount.type == 'sales') {
         this.updatedDiscount.start_date = null;
         this.updatedDiscount.end_date = null;
+        this.updatedDiscount.sales = parseFloat(this.updatedDiscount.sales.toString().replace(",","."));
       }
 
       // Add product and customer IDs to Discount
@@ -200,8 +201,7 @@ export default {
       }
 
       // Replace , => .
-      this.updatedDiscount.amount.replace(",",".");
-      this.updatedDiscount.sales.replace(",",".");
+      this.updatedDiscount.amount = parseFloat(this.updatedDiscount.amount.toString().replace(",","."));
 
       // Show loader and put data to API
       let loader = this.$loading.show({});
@@ -215,6 +215,7 @@ export default {
         });
         this.closeUpdateForm();
       } catch (error) {
+        loader.hide();
         this.$toast.error(`Error Occurred!`, {
           duration: 6000,
         });
@@ -253,6 +254,7 @@ export default {
           duration: 6000,
         });
       } catch (error) {
+        loader.hide();
         this.$toast.error(`Error Occurred!`, {
           duration: 6000,
         });

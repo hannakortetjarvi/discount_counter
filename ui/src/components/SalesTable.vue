@@ -151,6 +151,7 @@ export default {
         this.updatedSale.product_id = '';
         this.updatedSale.count = 1;
       } catch (error) {
+        loader.hide();
         this.$toast.error(`Error Occurred!`, {
           duration: 6000,
         });
@@ -175,6 +176,7 @@ export default {
           duration: 6000,
         });
       } catch (error) {
+        loader.hide();
         this.$toast.error(`Error Occurred!`, {
           duration: 6000,
         });

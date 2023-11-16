@@ -14,8 +14,8 @@
       <tr v-for="price in prices" :key="price.product_id">
         <td>{{ customers.find(c => c.id == price.customer_id).name }}</td>
         <td>{{ price.customer_id }}</td>
-        <td>{{ price.id }}</td>
         <td>{{ price.name }}</td>
+        <td>{{ price.id }}</td>
         <td>{{ price.price }}</td>
         <td>{{ products.find(p => p.id == price.id).price }}</td>
       </tr>
@@ -139,7 +139,7 @@ export default {
                     }
                 });
                 // Set calculated price
-                price.price = price.price.toFixed(2);
+                price.price = (Math.floor(price.price * 100) / 100).toFixed(2);
                 this.prices.push({ ...price });
             });
         },

@@ -125,6 +125,7 @@ export default {
       else if (this.newDiscount.type == 'sales') {
         this.newDiscount.start_date = null;
         this.newDiscount.end_date = null;
+        this.newDiscount.sales = parseFloat(this.newDiscount.sales.toString().replace(",","."));
       }
 
       if (this.newDiscount.customer_ids == 'all') {
@@ -139,9 +140,7 @@ export default {
         this.newDiscount.product_ids = ([this.newDiscount.product_ids]).toString();
       }
 
-      // Replace , => .
-      this.newDiscount.amount.replace(",",".");
-      this.newDiscount.sales.replace(",",".");
+      this.newDiscount.amount = parseFloat(this.newDiscount.amount.toString().replace(",","."));
 
       // Show loader and post discount
       let loader = this.$loading.show({});
@@ -152,6 +151,7 @@ export default {
           duration: 6000,
         });
       } catch (error) {
+        loader.hide();
         this.$toast.error(`Error Occurred!`, {
           duration: 6000,
         });
